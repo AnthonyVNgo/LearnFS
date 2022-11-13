@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import RandomLetterView from '../views/RandomLetterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,12 +6,17 @@ const router = createRouter({
     {
       path: '/',
       name: 'random-letter',
-      component: RandomLetterView
+      component: () => import('../views/RandomLetterView.vue')
     },
     {
       path: '/random-word',
       name: 'random-word',
       component: () => import('../views/RandomWordView.vue')
+    },
+    {
+      path: '/fs-typewriter',
+      name: 'fs-typewriter',
+      component: () => import('../views/FSTypeWriterView.vue')
     }
   ]
 })
