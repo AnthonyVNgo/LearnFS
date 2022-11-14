@@ -4,9 +4,9 @@
     <div class="col">
       <h1>Random Letter</h1>
 
-      <div class="card">
-        <div class="card-body">
-          <p>{{randomLetter}}</p>
+      <div class="card ratio ratio-1x1">
+        <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+          <span style="font-size: 100px">{{randomLetter}}</span>
         </div>
       </div>
 
