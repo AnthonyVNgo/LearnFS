@@ -1,5 +1,5 @@
 <template>
-  <h1>Finger Spelling Typewriter</h1>
+  <h1>Typewriter</h1>
 </template>
 
 <script setup>
