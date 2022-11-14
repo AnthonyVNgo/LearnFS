@@ -9,7 +9,7 @@
       </div>
 
       <div>
-        <input type="email" class="form-control my-3" id="exampleFormControlInput1" placeholder="Type here" @keypress="getKey">
+        <input type="email" class="form-control my-3" id="exampleFormControlInput1" placeholder="Type here" v-model="inputLetter">
         <button type="button" class="btn btn-dark" @click="getRandomLetter">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -33,47 +33,58 @@ import { ref,
   onUnmounted,
   onActivated,
   onDeactivated,
-  onErrorCaptured } from 'vue';
-const randomLetter = ref('')
+  onErrorCaptured,
+  watch } from 'vue';
 
-function getKey() {
-  console.log('bang')
-}
+let inputLetter = ref('')
+
+watch(inputLetter, (newLetter, oldLetter) => {
+  console.log('new letter:', newLetter)
+  console.log('old letter:', oldLetter)
+  if (inputLetter.valiue === 'abc') {
+    inputLetter.value = ''
+  }
+})
+
+let randomLetter = ref('')
 
 function getRandomLetter() {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
   randomLetter.value = alphabet[Math.floor(Math.random() * alphabet.length)]
-  console.log(randomLetter.value)
+  // console.log(randomLetter.value)
 }
 
-  onBeforeMount(() => {
-    console.log("Before Mount!");
-    getRandomLetter()
-  });
-  onMounted(() => {
-    console.log("Mounted!");
-  });
-  onBeforeUpdate(() => {
-    console.log("Before Update!");
-  });
-  onUpdated(() => {
-    console.log("Updated!");
-  });
-  onBeforeUnmount(() => {
-    console.log("Before Unmount!");
-  });
-  onUnmounted(() => {
-    console.log("Unmounted!");
-  });
-  onActivated(() => {
-    console.log("Activated!");
-  });
-  onDeactivated(() => {
-    console.log("Deactivated!");
-  });
-  onErrorCaptured(() => {
-    console.log("Error Captured!");
-  });
+onBeforeMount(() => {
+  getRandomLetter()
+});
+
+  // onBeforeMount(() => {
+  //   console.log("Before Mount!");
+  // });
+  // onMounted(() => {
+  //   console.log("Mounted!");
+  // });
+  // onBeforeUpdate(() => {
+  //   console.log("Before Update!");
+  // });
+  // onUpdated(() => {
+  //   console.log("Updated!");
+  // });
+  // onBeforeUnmount(() => {
+  //   console.log("Before Unmount!");
+  // });
+  // onUnmounted(() => {
+  //   console.log("Unmounted!");
+  // });
+  // onActivated(() => {
+  //   console.log("Activated!");
+  // });
+  // onDeactivated(() => {
+  //   console.log("Deactivated!");
+  // });
+  // onErrorCaptured(() => {
+  //   console.log("Error Captured!");
+  // });
 </script>
 
 <style scoped>
