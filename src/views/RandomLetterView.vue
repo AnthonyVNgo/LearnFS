@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container" @keydown="handleKeyDown">
   <div class="row">
     <div class="col">
       <div class="card ratio ratio-1x1">
@@ -8,9 +8,9 @@
         </div>
       </div>
 
-      <div tabindex="0" @keypress="consolelogBang" style="background-color: red;">
+      <div style="background-color: red;">
         <input type="text" class="form-control my-3" id="exampleFormControlInput1" placeholder="Type here" v-model="inputLetter">
-        <button type="button" class="btn btn-dark" @click="getRandomLetter">
+        <!-- <button type="button" class="btn btn-dark" @click="getRandomLetter"> -->
         <button type="button" class="btn btn-primary" @click="getRandomLetter">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -37,34 +37,41 @@ import { ref,
   onErrorCaptured,
   watch } from 'vue';
 
-let inputLetter = ref('')
+let inputLetter = $ref('')
 
 watch(inputLetter, (newLetter, oldLetter) => {
   console.log('new letter:', newLetter)
   console.log('old letter:', oldLetter)
-  if (inputLetter.valiue === 'abc') {
-    inputLetter.value = ''
+  if (inputLetter === 'abc') {
+    inputLetter = ''
   }
 })
 
-let randomLetter = ref('')
+let randomLetter = $ref('')
 
 function getRandomLetter() {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
-  randomLetter.value = alphabet[Math.floor(Math.random() * alphabet.length)]
-  // console.log(randomLetter.value)
+  randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
 }
 
-function clearInput() {
-  
+function handleKeyDown(event) {
+  if (event.which >= 65 && event.which <= 90) {
+    console.log(event.key);
+  }
 }
 
-function consolelogBang() {
-  console.log(Event)
-}
+// mounted() {
+// 	window.addEventListener('keypress', this._keyListener);
+// },
+
+// beforeDestroy() {
+// 	window.removeEventListener('keypress', this._keyListener);
+// },
 
 onBeforeMount(() => {
   getRandomLetter()
+  window.addEventListener('keydown', handleKeyDown);
+  // window.addEventListener('keypress', listenForKeyEvents);
 });
 
   // onBeforeMount(() => {
