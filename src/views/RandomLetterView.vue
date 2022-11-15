@@ -89,24 +89,18 @@ import { ref,
   onErrorCaptured,
   watch } from 'vue';
 
-function handleToastTrigger() {
-  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-  var toastList = toastElList.map(function(toastEl) {
-    return new bootstrap.Toast(toastEl)
-  })
-  toastList.forEach(toast => toast.show())
-}
-
+// app generated random letter   
 let randomLetter = $ref('')
-
 function getRandomLetter() {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
   randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
 }
+onBeforeMount(() => {
+  getRandomLetter()
+});
 
+// user input letter
 let inputLetter = ref('')
-let input = ref('')
-
 function handleKeyDown(event) {
   if (event.which >= 65 && event.which <= 90) {
     inputLetter.value = event.key
@@ -122,9 +116,14 @@ watch(inputLetter, (newValue, oldValue) => {
   }
 })
 
-onBeforeMount(() => {
-  getRandomLetter()
-});
+// toast 
+function handleToastTrigger() {
+  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+  var toastList = toastElList.map(function(toastEl) {
+    return new bootstrap.Toast(toastEl)
+  })
+  toastList.forEach(toast => toast.show())
+}
 
 // beforeDestroy() {
 // 	window.removeEventListener('keypress', this._keyListener);

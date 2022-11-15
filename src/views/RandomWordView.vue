@@ -1,11 +1,22 @@
 <template>
-  <h1>Random Word</h1>
-  <p v-if="randomWord === ''">Click the button to...</p>
-  <p v-else>{{ randomWord }}</p>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <!-- there's a v-for list somewhere here  -->
+        <div class="card ratio ratio-1x1">
+          <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+            <span style="font-size: 100px">{{randomLetter}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <button @click="getRandomWord">
-    get word
-  </button>
+    <div class="row">
+      <div class="col">
+        <h5>Spell out the fingerspelling word below</h5>
+      </div>
+    </div>
+  </div>
 
 </template>
 
