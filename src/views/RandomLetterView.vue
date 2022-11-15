@@ -8,9 +8,10 @@
         </div>
       </div>
 
-      <div style="background-color: red;">
-        <input type="text" class="form-control my-3" id="exampleFormControlInput1" placeholder="Type here" v-model="inputLetter">
+      <div>
+        <!-- <input type="text" class="form-control my-3" id="exampleFormControlInput1" placeholder="Type here" v-model="inputLetter"> -->
         <!-- <button type="button" class="btn btn-dark" @click="getRandomLetter"> -->
+        <span v-if="inputLetter !== ''">{{inputLetter}}</span>
         <button type="button" class="btn btn-primary" @click="getRandomLetter">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -37,15 +38,15 @@ import { ref,
   onErrorCaptured,
   watch } from 'vue';
 
-let inputLetter = $ref('')
 
-watch(inputLetter, (newLetter, oldLetter) => {
-  console.log('new letter:', newLetter)
-  console.log('old letter:', oldLetter)
-  if (inputLetter === 'abc') {
-    inputLetter = ''
-  }
-})
+
+// watch(inputLetter, (newLetter, oldLetter) => {
+//   console.log('new letter:', newLetter)
+//   console.log('old letter:', oldLetter)
+//   if (inputLetter === 'abc') {
+//     inputLetter = ''
+//   }
+// })
 
 let randomLetter = $ref('')
 
@@ -54,11 +55,23 @@ function getRandomLetter() {
   randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
 }
 
+let inputLetter = ref('')
+
 function handleKeyDown(event) {
   if (event.which >= 65 && event.which <= 90) {
-    console.log(event.key);
+    // console.log(event.key);
+    inputLetter.value = event.key
   }
 }
+
+watch(inputLetter, (newValue, oldValue) => {
+  // console.log(newValue)
+  if (newValue === randomLetter) {
+    // console.log('bang')
+    getRandomLetter()
+    inputLetter.value = ''
+  }
+})
 
 // mounted() {
 // 	window.addEventListener('keypress', this._keyListener);
