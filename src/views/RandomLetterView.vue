@@ -28,8 +28,21 @@
         </div>
       </div>
 
+<!-- Toast btn  -->
+<button type="button" class="btn btn-primary" id="toastbtn" @click="handleToastTrigger">Show Toast</button>
 
-      <!-- Button trigger modal -->
+<!-- Toast component  -->
+<div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1000">
+  <div class="d-flex">
+    <div class="toast-body">
+      Hello, world! This is a toast message.
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+
+
+<!-- Info Modal Trigger Button -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info" viewBox="0 0 16 16">
   <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
@@ -69,6 +82,14 @@ import { ref,
   onDeactivated,
   onErrorCaptured,
   watch } from 'vue';
+
+function handleToastTrigger() {
+  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+  var toastList = toastElList.map(function(toastEl) {
+    return new bootstrap.Toast(toastEl)
+  })
+  toastList.forEach(toast => toast.show())
+}
 
 let randomLetter = $ref('')
 
