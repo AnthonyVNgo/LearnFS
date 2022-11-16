@@ -20,12 +20,12 @@
               <h5>Spell out the fingerspelling word below</h5>
             </label>
             <!-- add two way binding here  -->
-            <input type="text" class="form-control" id="exampleInputPassword1">
+            <input type="text" class="form-control" id="exampleInputPassword1" >
           </div>
           <!-- add function to check input -->
           <!-- if input is a match, then positive feedback & generate new word  -->
           <!-- if input is not a match, then negative feedback toast: try again  -->
-          <button  class="btn btn-primary">Submit</button>
+          <!-- <button  class="btn btn-primary">Submit</button> -->
 
         </form>
 
@@ -57,10 +57,14 @@ function getRandomWord() {
   .then(res => res.json())
   .then(data => {
     randomWord.value = data[0]
-    console.log(randomWord.value)
+    // console.log(randomWord.value)
   })
   .catch(err => console.log(err))
 }
+
+onBeforeMount(() => {
+  getRandomWord()
+});
 
 // random word split 
 const randomWordArray = computed(() => {
