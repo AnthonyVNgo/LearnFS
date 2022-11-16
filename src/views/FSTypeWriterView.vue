@@ -2,8 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="d-flex">
-          <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1">
+        <div class="d-flex flex-wrap">
+          <!-- <div v-for="letter in inputWordArray" class="card ratio ratio-1x1 mx-1"> -->
+          <div v-for="letter in inputWordArray" class="card w-25">
           <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
             <span style="font-size: 75px">{{letter}}</span>
           </div>
@@ -21,7 +22,7 @@
             </label>
             
             <div class="input-group mb-3">
-              <input v-model="inputWord" type="text" class="form-control" id="userInput">
+              <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="16">
             </div>
           </div>
         </form>
