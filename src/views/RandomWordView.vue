@@ -16,8 +16,7 @@
         <button @click="getRandomWord">click</button>
         <button @click="splitter">splitter</button>
         <div v-if="randomWord !== ''">
-          <p>hi</p>
-          <!-- <p v-for="letter in randomWordArray">hi</p> -->
+          <p v-for="letter in randomWordArray">{{letter}}</p>
         </div>
       </div>
     </div>
