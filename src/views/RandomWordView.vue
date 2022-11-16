@@ -2,9 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="card ratio ratio-1x1">
+        <div v-for="letter in randomWordArray" class="card ratio ratio-1x1">
           <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-            <!-- <span style="font-size: 100px">{{randomLetter}}</span> -->
+            <span style="font-size: 100px">{{letter}}</span>
           </div>
         </div>
       </div>
@@ -15,9 +15,6 @@
         <h5>Spell out the fingerspelling word below</h5>
         <button @click="getRandomWord">click</button>
         <button @click="splitter">splitter</button>
-        <div v-if="randomWord !== ''">
-          <p v-for="letter in randomWordArray">{{letter}}</p>
-        </div>
       </div>
     </div>
   </div>
@@ -49,6 +46,9 @@ function splitter() {
   console.log(randomWord.value)
   console.log(randomWordArray.value)
 }
+
+// add mounted life cycle somewhere so the word is prefetched 
+
 
 // user can enter letter values 
 // user can submit answer 
