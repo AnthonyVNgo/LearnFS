@@ -47,7 +47,11 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { 
+  ref, 
+  computed,
+  onBeforeMount,
+} from 'vue'
 
 // random word 
 const randomWord = ref('')
@@ -57,7 +61,6 @@ function getRandomWord() {
   .then(res => res.json())
   .then(data => {
     randomWord.value = data[0]
-    // console.log(randomWord.value)
   })
   .catch(err => console.log(err))
 }

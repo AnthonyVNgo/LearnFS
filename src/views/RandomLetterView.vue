@@ -77,7 +77,8 @@
 </template>
 
 <script setup>
-import { ref,   
+import { 
+  ref,   
   onBeforeMount,
   onMounted,
   onBeforeUpdate,
@@ -87,7 +88,8 @@ import { ref,
   onActivated,
   onDeactivated,
   onErrorCaptured,
-  watch } from 'vue';
+  watch 
+} from 'vue';
 
 // app generated random letter   
 let randomLetter = $ref('')
