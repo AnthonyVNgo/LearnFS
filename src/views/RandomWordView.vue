@@ -14,23 +14,19 @@
 
     <div class="row">
       <div class="col">
-        <form>
+        <!-- <form @submit.prevent="onSubmit"> -->
+        <form @submit.prevent="checkUserInput">
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">
+            <label for="userInput" class="form-label">
               <h5>Spell out the fingerspelling word below</h5>
             </label>
-            <!-- add two way binding here  -->
-            <input type="text" class="form-control" id="exampleInputPassword1" >
+            <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="4" required>
           </div>
           <!-- add function to check input -->
           <!-- if input is a match, then positive feedback & generate new word  -->
           <!-- if input is not a match, then negative feedback toast: try again  -->
           <!-- <button  class="btn btn-primary">Submit</button> -->
-
         </form>
-
-
-
 
         <button type="button" class="btn btn-dark" @click="getRandomWord">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
@@ -39,7 +35,7 @@
           </svg>
         </button>
 
-        <!-- <button @click="splitter">splitter</button> -->
+        <button @click="splitter">splitter</button>
       </div>
     </div>
   </div>
@@ -62,7 +58,7 @@ function getRandomWord() {
   .then(data => {
     randomWord.value = data[0]
   })
-  .catch(err => console.log(err))
+  .catch(err => console.log('error:', err))
 }
 
 onBeforeMount(() => {
@@ -75,11 +71,19 @@ const randomWordArray = computed(() => {
 });
 
 function splitter() {
-  console.log(randomWord.value)
-  console.log(randomWordArray.value)
+  console.log('randomWord:', randomWord.value)
+  console.log('randomWordArray:', randomWordArray.value)
+  console.log('inputWord:', inputWord.value)
 }
 
-// add mounted life cycle somewhere so the word is prefetched 
+// user input 
+let inputWord = ref('')
+
+function checkUserInput() {
+  if (inputWord.value.length === 4) {
+    console.log('bang')
+  }
+}
 
 
 // user can enter letter values 
