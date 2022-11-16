@@ -44,4 +44,9 @@ let inputWord = ref('')
 const inputWordArray = computed(() => {
   return inputWord.value.split('')
 });
+
+// only allow letters in input 
+// center align typewriter display
+
+// bottom the input 
 </script>
