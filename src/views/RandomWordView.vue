@@ -36,7 +36,7 @@
 
         <!-- Toast  -->
         <div class="toast-container position-fixed bottom-0 p-3">
-          <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
               <div class="toast-body">
                 Try again
@@ -94,7 +94,9 @@ function checkUserInput() {
     handleToastTrigger()
   } 
   else {
+    getRandomWord()
     console.log('nice!')
+    inputWord.value = ''
     
   }
 }
