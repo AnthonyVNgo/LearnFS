@@ -2,12 +2,21 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <div class="d-flex">
+        <div v-if="loading === true" class="d-flex">
           <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1">
-          <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-            <span style="font-size: 75px">{{letter}}</span>
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+              <div class="spinner-grow" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
           </div>
         </div>
+        <div v-else class="d-flex">
+          <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+              <span style="font-size: 75px">{{letter}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,14 +66,21 @@ import {
   onBeforeMount,
 } from 'vue'
 
+// loading state ? 
+const loading = ref(null)
+
 // random word 
 const randomWord = ref('')
 
 function getRandomWord() {
+  loading.value = true
+  console.log('loading:', loading.value)
   fetch('https://random-word-api.herokuapp.com/word?length=4')
   .then(res => res.json())
   .then(data => {
     randomWord.value = data[0]
+    loading.value = false
+    console.log('loading:', loading.value)
   })
   .catch(err => console.log('error:', err))
 }
@@ -106,6 +122,11 @@ function handleToastTrigger() {
   toastList.forEach(toast => toast.show())
 }
 
+// add skeleton loader/spinner for cards on fetch / regen 
+// https://getbootstrap.com/docs/5.0/components/spinners/
+
+
 // bonus feature: 
 // user can race against the clock 
+// user can select word length greater than 4 but less than or equal to 12 
 </script>
