@@ -20,7 +20,7 @@
             <label for="userInput" class="form-label">
               <h5>Spell out the fingerspelling word below</h5>
             </label>
-            <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="4" required>
+            <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="4" minlength="4" required>
           </div>
           <!-- add function to check input -->
           <!-- if input is a match, then positive feedback & generate new word  -->
@@ -80,8 +80,8 @@ function splitter() {
 let inputWord = ref('')
 
 function checkUserInput() {
-  if (inputWord.value.length === 4) {
-    console.log('bang')
+  if (inputWord.value.length !== 4) {
+    console.log('enter a 4 letter word')
   }
 }
 
