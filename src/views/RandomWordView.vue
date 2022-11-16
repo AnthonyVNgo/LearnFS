@@ -14,7 +14,6 @@
 
     <div class="row">
       <div class="col">
-        <!-- <form @submit.prevent="onSubmit"> -->
         <form @submit.prevent="checkUserInput">
           <div class="mb-3">
             <label for="userInput" class="form-label">
@@ -22,10 +21,7 @@
             </label>
             <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="4" minlength="4" required>
           </div>
-          <!-- add function to check input -->
           <!-- if input is a match, then positive feedback & generate new word  -->
-          <!-- if input is not a match, then negative feedback toast: try again  -->
-          <!-- <button  class="btn btn-primary">Submit</button> -->
         </form>
 
         <button type="button" class="btn btn-dark" @click="getRandomWord">
@@ -36,6 +32,19 @@
         </button>
 
         <button @click="splitter">splitter</button>
+
+
+        <!-- Toast  -->
+        <div class="toast-container position-fixed bottom-0 p-3">
+          <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+              <div class="toast-body">
+                Try again
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -80,23 +89,28 @@ function splitter() {
 let inputWord = ref('')
 
 function checkUserInput() {
-  if (inputWord.value.length !== 4) {
-    console.log('enter a 4 letter word')
+  if (inputWord.value !== randomWord.value) {
+    console.log('try again')
+    handleToastTrigger()
+  } 
+  else {
+    console.log('nice!')
+    
   }
 }
 
+// toast 
+function handleToastTrigger() {
+  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+  var toastList = toastElList.map(function(toastEl) {
+    return new bootstrap.Toast(toastEl)
+  })
+  toastList.forEach(toast => toast.show())
+}
 
-// user can enter letter values 
-// user can submit answer 
+
 // user can race against the clock 
-// user can get new word
-// user will be notified of correct answer 
-// split the word up
-// loop over it to create each card 
-// add input validation like in RLview 
-// move on to typewriter 
-// touch up UI on mobile 
-// desktop UI 
+
 
 </script>
 
