@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row align-items-center" style="height: 50vh;">
       <div class="col">
         <div v-if="loading === true" class="d-flex">
           <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1">
