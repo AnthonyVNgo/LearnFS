@@ -2,9 +2,11 @@
 <div class="container" @keydown="handleKeyDown">
   <div class="row my-5">
     <div class="col">
-      <div class="card ratio ratio-1x1">
-        <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-          <span style="font-size: 100px">{{randomLetter}}</span>
+      <div class="d-flex justify-content-center">
+        <div class="card ratio ratio-1x1 w-50">
+          <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+            <span style="font-size: 100px">{{randomLetter}}</span>
+          </div>
         </div>
       </div>
 
