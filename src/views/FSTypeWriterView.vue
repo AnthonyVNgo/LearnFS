@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col">
         <form @submit.prevent="checkUserInput">
-          <div class="mb-3">
+          <div class="mb-3" style="position: absolute; bottom: 0; left: 0; right: 0;">
             <label for="userInput" class="form-label">
               <h5>Convert letters to fingerspelling</h5>
             </label>
@@ -47,6 +47,4 @@ const inputWordArray = computed(() => {
 
 // only allow letters in input 
 // center align typewriter display
-
-// bottom the input 
 </script>
