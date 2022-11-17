@@ -5,7 +5,8 @@
       <div class="d-flex justify-content-center">
         <div class="card ratio ratio-1x1 w-50">
           <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-            <span style="font-size: 100px">{{randomLetter}}</span>
+            <!-- <span style="font-size: 100px">{{randomLetter}}</span> -->
+            <img :src="`../../public/images/${randomLetter}.png`" alt="" srcset="" style="height: 100px;">
           </div>
         </div>
       </div>
