@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row align-items-center" style="height: 50vh;">
       <div class="col">
         <div class="d-flex flex-wrap">
           <div v-for="letter in inputWordArray" class="card w-25 ratio ratio-1x1">
@@ -20,7 +20,7 @@
               <h5>Convert letters to fingerspelling</h5>
             </label>
             <div class="input-group mb-3">
-              <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="16">
+              <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="16" pattern="[A-Za-z]">
             </div>
           </div>
         </form>

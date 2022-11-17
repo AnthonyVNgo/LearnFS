@@ -28,6 +28,11 @@
 </template>
 
 <script setup>
+// add a home screen
+// remove nav bar if on home screen view 
+// add levels selection on home screen
+// connect routes to each level selection similar to fingerspleling.io 
+
 </script>
 
 <style>
