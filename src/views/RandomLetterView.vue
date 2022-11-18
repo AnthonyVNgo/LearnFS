@@ -71,6 +71,7 @@ function getRandomLetter() {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
   randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
 }
+
 onBeforeMount(() => {
   getRandomLetter()
 });
