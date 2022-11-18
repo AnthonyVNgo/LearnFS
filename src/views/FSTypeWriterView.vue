@@ -11,7 +11,6 @@
       </div>
     </div>
 
-    <!-- Instructions  -->
     <div class="row">
       <div class="col" style="text-align: center">
         <form @submit.prevent="generateInputWordArray">
@@ -30,17 +29,10 @@
 
 <script setup>
 import { 
-  ref, 
-  computed,
+  ref
 } from 'vue'
 
-// user input 
-let inputWord = ref('')
-
-// user input split 
-// const inputWordArray = computed(() => {
-//   return inputWord.value.split('')
-// });
+const inputWord = ref('')
 
 const inputWordArray = ref('')
 

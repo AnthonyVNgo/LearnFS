@@ -4,16 +4,16 @@
   <div class="row align-items-center" style="height: 50vh;">
     <div class="col">
       <div class="d-flex justify-content-center">
-        <div class="card ratio ratio-1x1 w-50">
+        <!-- <div class="card ratio ratio-1x1 w-50"> -->
+        <div class="card ratio ratio-1x1" style="max-width: 315px;">
           <img :src="`../../public/images/${randomLetter}.png`" alt="" srcset="" style="object-fit: contain;" class="card-body">
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Instructions  -->
   <div class="row justify-content-center">
-    <div class="col" style="text-align: center">
+    <div class="col" style="text-align: center; max-width: 400px;">
       <label for="userInput" class="form-label">
         <h5>Enter the Fingerspelling letter below</h5>
       </label>
@@ -28,24 +28,10 @@
       </div>
     </div>
   </div>
-
-  <!-- will likely remove toast because you can't see on mobile  -->
-  <!-- Toast  -->
-  <!-- <div class="toast-container d-flex justify-content-center position-fixed top-0 start-0 end-0 p-3 w-100">
-    <div class="toast align-items-center text-bg-dark text-white border-0 m-0" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="d-flex">
-        <div class="toast-body">
-          Good job
-        </div>
-      </div>
-    </div>
-  </div> -->
-
 </div>
 <!-- add streak counter  -->
 <!-- convert all pngs to svgs  SGV BABYYYY -->
 <!-- update package stuff  -->
-<!-- code cleanup stuff  -->
 <!-- add some color and pizzaz  -->
 
 </template>
@@ -87,22 +73,12 @@ function handleKeyDown(event) {
 watch(inputLetter, (newValue, oldValue) => {
   if (newValue === randomLetter) {
     getRandomLetter()
-    // handleToastTrigger()
     inputLetter.value = ''
   }
   else {
     console.log('try again')
   }
 })
-
-// toast 
-// function handleToastTrigger() {
-//   var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-//   var toastList = toastElList.map(function(toastEl) {
-//     return new bootstrap.Toast(toastEl)
-//   })
-//   toastList.forEach(toast => toast.show())
-// }
 
 // beforeDestroy() {
 // 	window.removeEventListener('keypress', this._keyListener);
