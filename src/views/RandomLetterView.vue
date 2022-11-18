@@ -1,51 +1,52 @@
 <template>
+
 <div class="container" @keydown="handleKeyDown">
-  <div class="row py-5" style="height: 50vh; background-color: red">
+  <div class="row align-items-center" style="height: 50vh;">
     <div class="col">
-      <div class="row justify-content-center">
+      <div class="d-flex justify-content-center">
         <div class="card ratio ratio-1x1 w-50">
           <img :src="`../../public/images/${randomLetter}.png`" alt="" srcset="" style="object-fit: contain;" class="card-body">
         </div>
       </div>
-
-      <!-- Instructions  -->
-      <div class="row my-5">
-        <div class="col">
-          <h5>Enter the Fingerspelling letter below</h5>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control form-control" id="" v-model="inputLetter" maxlength="1">
-            <button type="button" class="btn btn-dark" @click="getRandomLetter">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Toast  -->
-      <div class="toast-container position-fixed bottom-0 p-3">
-        <div class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="d-flex">
-            <div class="toast-body">
-              Good job
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- add streak counter  -->
-      <!-- convert all pngs to svgs  SGV BABYYYY -->
-      <!-- update package stuff  -->
-      <!-- code cleanup stuff  -->
-      <!-- add some color and pizzaz  -->
-
     </div>
   </div>
+
+  <!-- Instructions  -->
+  <div class="row justify-content-center">
+    <div class="col" style="text-align: center">
+      <label for="userInput" class="form-label">
+        <h5>Enter the Fingerspelling letter below</h5>
+      </label>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control form-control" id="randomLetter" v-model="inputLetter" maxlength="1">
+        <button type="button" class="btn btn-dark" @click="getRandomLetter">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast  -->
+  <div class="toast-container d-flex justify-content-center position-fixed bottom-0 start-0 end-0 p-3 w-100">
+    <div class="toast align-items-center text-bg-dark text-white border-0 m-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          Good job
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
-  
+<!-- add streak counter  -->
+<!-- convert all pngs to svgs  SGV BABYYYY -->
+<!-- update package stuff  -->
+<!-- code cleanup stuff  -->
+<!-- add some color and pizzaz  -->
+
 </template>
 
 <script setup>
@@ -86,7 +87,6 @@ watch(inputLetter, (newValue, oldValue) => {
     getRandomLetter()
     handleToastTrigger()
     inputLetter.value = ''
-    // need to somehow clear the input value
   }
 })
 
