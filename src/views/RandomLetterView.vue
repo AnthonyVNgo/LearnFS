@@ -47,6 +47,13 @@
         </div>
       </div>
 
+
+      <!-- add streak counter  -->
+      <!-- convert all pngs to svgs  SGV BABYYYY -->
+      <!-- update package stuff  -->
+      <!-- code cleanup stuff  -->
+      <!-- add some color and pizzaz  -->
+
     </div>
   </div>
 </div>

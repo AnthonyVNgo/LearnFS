@@ -6,7 +6,7 @@
           <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1">
             <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
               <div class="spinner-grow" role="status">
-                <span class="visually-hidden">Loading...</span>
+                <!-- <span class="visually-hidden">Loading...</span> -->
               </div>
             </div>
           </div>
@@ -29,7 +29,9 @@
             
             <div class="input-group mb-3">
               <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="4" minlength="4" required>
-              <button type="button" class="btn btn-dark" @click="getRandomWord">
+              <!-- <button type="button" class="btn btn-dark" @click="getRandomWord"> -->
+              <!-- <button type="button" class="btn" @click="getRandomWord" style="background-color: #FD6C6C;"> -->
+              <button type="button" class="btn" @click="getRandomWord" style="background-color: #656F7F;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
                   <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
                   <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -49,6 +51,8 @@
             </div>
           </div>
         </div>
+        <!-- fix toast positioning for mobile x desktop  -->
+        <!-- fix toast fade fade out time  -->
 
       </div>
     </div>
@@ -119,4 +123,5 @@ function handleToastTrigger() {
 // bonus feature: 
 // user can race against the clock 
 // user can select word length greater than 4 but less than or equal to 12 
+// add streak counter 
 </script>

@@ -3,12 +3,11 @@
     <div class="row align-items-center" style="height: 50vh;">
       <div class="col">
         <div class="d-flex flex-wrap">
+          <!-- add v-if here for if there isn't any user input  -->
+          <!-- add else for when there is user input  -->
           <div v-for="letter in inputWordArray" class="card w-25 ratio ratio-1x1">
-          <!-- <div class="card-body" style="display: flex; justify-content: center; align-items: center;"> -->
-            <!-- <span style="font-size: 75px">{{letter}}</span> -->
             <img :src="`../../public/images/${letter}.png`" alt="" srcset="" style="object-fit: contain;" class="card-body">
-          <!-- </div> -->
-        </div>
+          </div>
         </div>
       </div>
     </div>

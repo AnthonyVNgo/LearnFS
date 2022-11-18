@@ -1,5 +1,6 @@
 <template>
-<nav class="navbar navbar-expand-lg bg-light">
+<!-- <nav class="navbar navbar-expand-lg bg-light"> -->
+<nav class="navbar navbar-expand-lg" style="background-color: #FD6C6C;">
   <div class="container-fluid">
     <RouterLink class="navbar-brand" to="/">LearnFS.io</RouterLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,11 +29,6 @@
 </template>
 
 <script setup>
-// add a home screen
-// remove nav bar if on home screen view 
-// add levels selection on home screen
-// connect routes to each level selection similar to fingerspleling.io 
-
 </script>
 
 <style>
