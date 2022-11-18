@@ -1,12 +1,10 @@
 <template>
-
-<div class="container" @keydown="handleKeyDown">
+<div class="container">
   <div class="row align-items-center" style="height: 50vh;">
     <div class="col">
       <div class="d-flex justify-content-center">
-        <!-- <div class="card ratio ratio-1x1 w-50"> -->
         <div class="card ratio ratio-1x1" style="max-width: 315px;">
-          <img :src="`../../public/images/${randomLetter}.png`" alt="" srcset="" style="object-fit: contain;" class="card-body">
+          <img :src="`../../public/images/${randomLetter}.png`" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
         </div>
       </div>
     </div>
@@ -14,11 +12,11 @@
 
   <div class="row justify-content-center">
     <div class="col" style="text-align: center; max-width: 400px;">
-      <label for="userInput" class="form-label">
-        <h5>Enter the Fingerspelling letter below</h5>
+      <label for="randomLetter" class="form-label">
+        <h5>Enter the correct Fingerspelling letter</h5>
       </label>
       <div class="input-group mb-3">
-        <input type="text" class="form-control form-control" id="randomLetter" v-model="inputLetter" maxlength="1">
+        <input type="text" class="form-control form-control" id="randomLetter" v-model="inputLetter" maxlength="1" @keydown="handleKeyDown" placeholder="Type here">
         <button type="button" class="btn btn-dark" @click="getRandomLetter">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -33,6 +31,7 @@
 <!-- convert all pngs to svgs  SGV BABYYYY -->
 <!-- update package stuff  -->
 <!-- add some color and pizzaz  -->
+<!-- probbably add slots / componnents for the card section and the instructions and input section to reuse -->
 
 </template>
 
