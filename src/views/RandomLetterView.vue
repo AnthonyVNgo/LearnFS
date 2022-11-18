@@ -29,8 +29,9 @@
     </div>
   </div>
 
+  <!-- will likely remove toast because you can't see on mobile  -->
   <!-- Toast  -->
-  <div class="toast-container d-flex justify-content-center position-fixed bottom-0 start-0 end-0 p-3 w-100">
+  <!-- <div class="toast-container d-flex justify-content-center position-fixed top-0 start-0 end-0 p-3 w-100">
     <div class="toast align-items-center text-bg-dark text-white border-0 m-0" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="d-flex">
         <div class="toast-body">
@@ -38,7 +39,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 </div>
 <!-- add streak counter  -->
@@ -85,19 +86,22 @@ function handleKeyDown(event) {
 watch(inputLetter, (newValue, oldValue) => {
   if (newValue === randomLetter) {
     getRandomLetter()
-    handleToastTrigger()
+    // handleToastTrigger()
     inputLetter.value = ''
+  }
+  else {
+    console.log('try again')
   }
 })
 
 // toast 
-function handleToastTrigger() {
-  var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-  var toastList = toastElList.map(function(toastEl) {
-    return new bootstrap.Toast(toastEl)
-  })
-  toastList.forEach(toast => toast.show())
-}
+// function handleToastTrigger() {
+//   var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+//   var toastList = toastElList.map(function(toastEl) {
+//     return new bootstrap.Toast(toastEl)
+//   })
+//   toastList.forEach(toast => toast.show())
+// }
 
 // beforeDestroy() {
 // 	window.removeEventListener('keypress', this._keyListener);
