@@ -6,7 +6,6 @@
           <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1">
             <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
               <div class="spinner-grow" role="status">
-                <!-- <span class="visually-hidden">Loading...</span> -->
               </div>
             </div>
           </div>
