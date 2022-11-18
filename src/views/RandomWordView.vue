@@ -4,7 +4,7 @@
     <div class="row align-items-center" style="height: 50vh;">
       <div class="col">
         <div v-if="loading === true" class="d-flex">
-          <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1">
+          <div v-for="letter in randomWordArray" class="ratio ratio-1x1 mx-1">
             <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
               <div class="spinner-grow" role="status">
               </div>
@@ -23,7 +23,7 @@
       <div class="col" style="text-align: center; max-width: 400px;">
         <form @submit.prevent="checkUserInput">
           <label for="userInput" class="form-label">
-            <h5>Translate fingerspelling below</h5>
+            <h5>Translate the Fingerspelling word</h5>
           </label>
           <div class="input-group mb-3">
             <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="4" minlength="4" required placeholder="Type here">
@@ -35,6 +35,8 @@
             </button>
           </div>
         </form>
+        <button @click="handleButtonClick(false)">-</button>
+        <button @click="handleButtonClick(true)">+</button>
       </div>
     </div>
   </div>
@@ -54,10 +56,11 @@ const randomWord = ref('')
 
 function getRandomWord() {
   loading.value = true
-  fetch('https://random-word-api.herokuapp.com/word?length=4')
+  fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength.value}`)
   .then(res => res.json())
   .then(data => {
     randomWord.value = data[0]
+    // console.log(randomWord.value)
     loading.value = false
   })
   .catch(err => console.log('error:', err))
@@ -82,6 +85,19 @@ function checkUserInput() {
   else {
     getRandomWord()
     inputWord.value = ''
+  }
+}
+
+const wordLength = ref(4)
+ 
+function handleButtonClick(boolean) {
+  if (boolean === true && wordLength.value <= 11) {
+    wordLength.value++
+    console.log(wordLength.value)
+  } 
+  else if(boolean === false && wordLength.value !== 4) {
+    wordLength.value--
+    console.log(wordLength.value)
   }
 }
 // bonus feature: 
