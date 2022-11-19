@@ -3,7 +3,7 @@
     <div class="row align-items-center" style="height: 50vh;">
       <div class="col">
         <div class="d-flex flex-wrap justify-content-center">
-          <h1 v-if="!inputWordArray.length">Type something below</h1>
+          <h1 v-if="!inputWordArray.length">Type + Enter below</h1>
           <div v-else v-for="letter in inputWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
             <img :src="`../../public/images/${letter}.png`" alt="" srcset="" style="object-fit: contain;" class="card-body">
           </div>
