@@ -1,8 +1,46 @@
 <template>
 
   <div class="container">
-    <div class="row align-items-center" style="height: 50vh;">
+    <div class="row align-items-center" style="height: 50vh; position: relative;">
       <div class="col">
+        <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
+          <div 
+          v-if="toastColor === 'danger'"
+          class="card bg-danger text-white"
+          style="width: 500px"
+          >
+            <div class="card-body">
+             Incorrect, try again
+            </div>
+          </div>
+          <div 
+          v-else-if="toastColor === 'warning'"
+          class="card bg-warning"
+          style="width: 500px"
+          >
+            <div class="card-body">
+             Please enter letters only
+            </div>
+          </div>
+          <div 
+          v-else-if="toastColor === 'success'"
+          class="card bg-primary text-white"
+          style="width: 500px"
+          >
+            <div class="card-body">
+             Correct
+            </div>
+          </div>
+          <div 
+          v-else="toastColor === ''"
+          class="card"
+          style="display: none;"
+          >
+            <div class="card-body">
+             success
+            </div>
+          </div>
+        </div>
         <div v-if="loading === true" class="d-flex flex-wrap justify-content-center">
           <div v-for="letter in randomWordArray" class="ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
             <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
@@ -92,7 +130,7 @@ function getRandomWord() {
   .then(res => res.json())
   .then(data => {
     randomWord.value = data[0];
-    console.log(randomWord.value);
+    console.log('randomWord:', randomWord.value);
     loading.value = false
   })
   .catch(err => console.log('error:', err))
@@ -111,18 +149,22 @@ const randomWordArray = computed(() => {
 let inputWord = ref('')
 
 function checkUserInput() {
-  if (inputWord.value !== randomWord.value) {
-    console.log('false value:', inputWord.value)
-    userInputCorrect.value = false
+  if (/^[a-zA-Z]+$/.test(inputWord.value) === false) {
+    toastColor.value = 'warning'
+  } else if (inputWord.value !== randomWord.value) {
+    toastColor.value = 'danger'
   } 
   else {
-    console.log('true value:', inputWord.value)
-    userInputCorrect.value = true
+    toastColor.value = 'success'
     inputWord.value = ''
     getRandomWord()
   }
+  setTimeout(() => {
+    toastColor.value = ''
+  }, 1000);
 }
 
+const toastColor = ref('')
 </script>
 
 <style scoped>
