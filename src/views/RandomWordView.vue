@@ -3,7 +3,8 @@
   <div class="container">
     <div class="row align-items-center" style="height: 50vh; position: relative;">
       <div class="col">
-        <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
+        <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 20px; left: 10px; right: 10px;">
+          <!-- refactor with slots / child components  -->
           <div 
           v-if="toastColor === 'danger'"
           class="card bg-danger text-white"
@@ -30,8 +31,9 @@
           :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
           style="width: 500px"
           >
-            <div class="card-body">
-             Correct
+            <div class="card-body d-flex justify-content-between">
+             <span v-if="correctCount === 1">Good job!</span>
+             <span v-else>Nice! You're on a {{correctCount}} word streak</span>
             </div>
           </div>
         </div>
@@ -149,21 +151,24 @@ function checkUserInput() {
   } else if (inputWord.value !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
+    correctCount.value = 0
   } 
   else {
     toastColor.value = 'success'
     isOpacity1.value = true
     inputWord.value = ''
+    correctCount.value++
     getRandomWord()
   }
   setTimeout(() => {
-    // toastColor.value = ''
     isOpacity1.value = false
   }, 250);
 }
 
 const isOpacity1 = ref(false)
 const toastColor = ref('')
+
+const correctCount = ref(0)
 </script>
 
 <style scoped>
@@ -173,6 +178,6 @@ const toastColor = ref('')
 }
 .opacity-0 {
   opacity: 0;
-  transition: opacity 2s ease-out;
+  transition: opacity 2.5s ease-out;
 }
 </style>
