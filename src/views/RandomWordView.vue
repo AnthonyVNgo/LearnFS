@@ -6,7 +6,7 @@
         <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
           <div 
           v-if="toastColor === 'danger'"
-          class="card bg-danger text-white"
+          class="card bg-danger text-white fade-out"
           style="width: 500px"
           >
             <div class="card-body">
@@ -15,7 +15,7 @@
           </div>
           <div 
           v-else-if="toastColor === 'warning'"
-          class="card bg-warning"
+          class="card bg-warning fade-out"
           style="width: 500px"
           >
             <div class="card-body">
@@ -24,20 +24,11 @@
           </div>
           <div 
           v-else-if="toastColor === 'success'"
-          class="card bg-primary text-white"
+          class="card bg-primary text-white fade-out"
           style="width: 500px"
           >
             <div class="card-body">
              Correct
-            </div>
-          </div>
-          <div 
-          v-else="toastColor === ''"
-          class="card"
-          style="display: none;"
-          >
-            <div class="card-body">
-             success
             </div>
           </div>
         </div>
@@ -168,4 +159,17 @@ const toastColor = ref('')
 </script>
 
 <style scoped>
+.fade-out {
+  animation: fadeOut ease 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 </style>
