@@ -45,9 +45,7 @@
             </button>
           </div>
         </form>
-        <!-- <button :class="confetti-button" @click="animateButton">Click me!</button> -->
-        <!-- <button :class="{ 'animate': animateValue }" @click="animateButton">Click me!</button> -->
-        <button class="confetti-button" :class="{ animate: animateValue }" @click="animateButton">Click me!</button>
+        <button @click="resetBoolean" :class="{'animated' : boolean }">pulser</button>
       </div>
     </div>
   </div>
@@ -111,90 +109,32 @@ function handleButtonClick(boolean) {
     getRandomWord()
   }
 }
+
+
+const boolean = ref(false)
+function resetBoolean() {
+  boolean.value = true
+  setTimeout(() => {
+    boolean.value = false
+  }, 350);
+}
 // bonus feature: 
 // user can race against the clock 
 // add streak counter 
-
-
-const animateValue = ref(false)
-function animateButton(e) {
-  // e.preventDefault;
-  animateValue.value = true
-  console.log('animate:', animateValue.value)
-  setTimeout(() => {
-    animateValue.value = false
-    console.log('animate:', animateValue.value)
-  }, 700);
-  
-  // setTimeout(() => {
-  //   animate.value = false
-  // }, timeout);
-  // e.target.classList.remove('animate');
-  // console.log(e.target.classList)
-  // e.target.classname = 'bang'
-  
-  // e.target.classList.add('animate');
-  // setTimeout(() => {
-  //   e.target.classList.remove('animate');
-  // },700);
-}
-
-// var animateButton = function(e) {
-//   e.preventDefault;
-//   e.target.classList.remove('animate');
-  
-//   e.target.classList.add('animate');
-//   setTimeout(function(){
-//     e.target.classList.remove('animate');
-//   },700);
-// };
-var classname = document.getElementsByClassName("confetti-button");
-for (var i = 0; i < classname.length; i++) {
-  classname[i].addEventListener('click', animateButton, false);
-}
-
 </script>
 
 <style scoped>
-.animate:before {
-  display: block;
-  animation: topBubbles ease-in-out 0.75s forwards;
-}
-.animate:after {
-  display: block;
-  animation: bottomBubbles ease-in-out 0.75s forwards;
-}
-/* .confetti-button.animate:before {
-  display: block;
-  animation: topBubbles ease-in-out 0.75s forwards;
-}
-.confetti-button.animate:after {
-  display: block;
-  animation: bottomBubbles ease-in-out 0.75s forwards;
-} */
 
-@keyframes 
-topBubbles {  0% {
- background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
+.animated {
+  animation: pulse 0.3s;
 }
- 50% {
- background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
-}
- 100% {
- background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
- background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-}
-}
-@keyframes 
-bottomBubbles {  0% {
- background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
-}
- 50% {
- background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
-}
- 100% {
- background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
- background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0px 0px 0px 0px ;
+    }
+    100% {
+       box-shadow: 0px 0px 5px 25px rgba(35, 130, 220,0);
+    }
 }
 </style>
