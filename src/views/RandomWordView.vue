@@ -25,8 +25,18 @@
           <label for="userInput" class="form-label">
             <h5>Translate the Fingerspelling word</h5>
           </label>
-          <div class="input-group mb-3">
-            <input v-model="inputWord" type="text" class="form-control" id="userInput" :maxlength="wordLength" minlength="4" required placeholder="Type here" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Please submit letters only')">
+          <div class="input-group mb-3" :class="{'pulse-green' : boolean && userInputCorrect, 'pulse-red': boolean && !userInputCorrect }">
+            <input 
+              v-model="inputWord" 
+              type="text" 
+              class="form-control" 
+              id="userInput" 
+              :maxlength="randomWordLength" 
+              minlength="4" required placeholder="Type here" 
+              pattern="^[a-zA-Z]+" 
+              oninvalid="setCustomValidity('Please submit letters only')" 
+              autocomplete="off"
+              >
             <button type="button" class="btn btn-dark" @click="handleButtonClick(false)">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
@@ -45,7 +55,7 @@
             </button>
           </div>
         </form>
-        <button @click="resetBoolean" :class="{'animated' : boolean }">pulser</button>
+        <!-- <button @click="resetBoolean" :class="{'pulse-green' : boolean && userInputCorrect, 'pulse-red': boolean && !userInputCorrect }">pulser</button> -->
       </div>
     </div>
   </div>
@@ -59,13 +69,29 @@ import {
   onBeforeMount,
 } from 'vue'
 
+// Loading 
 const loading = ref(null)
 
+// Random Word Length 
+const randomWordLength = ref(4)
+ 
+function handleButtonClick(boolean) {
+  if (boolean === true && randomWordLength.value <= 11) {
+    randomWordLength.value++
+    getRandomWord()
+  } 
+  else if(boolean === false && randomWordLength.value !== 4) {
+    randomWordLength.value--
+    getRandomWord()
+  }
+}
+
+// Random Word 
 const randomWord = ref('')
 
 function getRandomWord() {
   loading.value = true
-  fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength.value}`)
+  fetch(`https://random-word-api.herokuapp.com/word?length=${randomWordLength.value}`)
   .then(res => res.json())
   .then(data => {
     randomWord.value = data[0]
@@ -78,63 +104,64 @@ onBeforeMount(() => {
   getRandomWord()
 });
 
-// random word split 
+// Random Word Split 
 const randomWordArray = computed(() => {
   return randomWord.value.split('')
 });
 
-// user input 
-let inputWord = ref('')
-
-function checkUserInput() {
-  console.log(inputWord.value)
-  if (inputWord.value !== randomWord.value) {
-    console.log('inccorect')
-  } 
-  else {
-    getRandomWord()
-    inputWord.value = ''
-  }
-}
-
-const wordLength = ref(4)
- 
-function handleButtonClick(boolean) {
-  if (boolean === true && wordLength.value <= 11) {
-    wordLength.value++
-    getRandomWord()
-  } 
-  else if(boolean === false && wordLength.value !== 4) {
-    wordLength.value--
-    getRandomWord()
-  }
-}
-
-
+// User Input 
 const boolean = ref(false)
+
+const userInputCorrect = ref(null)
+
 function resetBoolean() {
   boolean.value = true
   setTimeout(() => {
     boolean.value = false
   }, 350);
 }
-// bonus feature: 
-// user can race against the clock 
-// add streak counter 
+
+let inputWord = ref('')
+
+function checkUserInput() {
+  console.log(inputWord.value)
+  if (inputWord.value !== randomWord.value) {
+    resetBoolean()
+    userInputCorrect.value = false
+  } 
+  else {
+    resetBoolean()
+    userInputCorrect.value = true
+    inputWord.value = ''
+    getRandomWord()
+  }
+}
+
 </script>
 
 <style scoped>
-
-.animated {
-  animation: pulse 0.3s;
+.pulse-green {
+  animation: pulse-green 0.3s;
 }
 
-@keyframes pulse {
+@keyframes pulse-green {
     0% {
         box-shadow: 0px 0px 0px 0px ;
     }
     100% {
-       box-shadow: 0px 0px 5px 25px rgba(35, 130, 220,0);
+       box-shadow: 0px 0px 5px 25px rgba(191, 255, 191, 0.654);
+    }
+}
+.pulse-red {
+  animation: pulse-red 0.3s;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0px 0px 0px 0px ;
+    }
+    100% {
+       box-shadow: 0px 0px 5px 25px rgb(255, 179, 179);
     }
 }
 </style>
