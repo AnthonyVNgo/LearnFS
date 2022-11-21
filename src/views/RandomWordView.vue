@@ -6,7 +6,8 @@
         <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
           <div 
           v-if="toastColor === 'danger'"
-          class="card bg-danger text-white fade-out"
+          class="card bg-danger text-white"
+          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
           style="width: 500px"
           >
             <div class="card-body">
@@ -15,16 +16,18 @@
           </div>
           <div 
           v-else-if="toastColor === 'warning'"
-          class="card bg-warning fade-out"
+          class="card bg-warning"
+          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
           style="width: 500px"
           >
             <div class="card-body">
-             Please enter letters only
+             Please use letters only
             </div>
           </div>
           <div 
           v-else-if="toastColor === 'success'"
-          class="card bg-primary text-white fade-out"
+          class="card bg-primary text-white"
+          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
           style="width: 500px"
           >
             <div class="card-body">
@@ -142,34 +145,34 @@ let inputWord = ref('')
 function checkUserInput() {
   if (/^[a-zA-Z]+$/.test(inputWord.value) === false) {
     toastColor.value = 'warning'
+    isOpacity1.value = true
   } else if (inputWord.value !== randomWord.value) {
     toastColor.value = 'danger'
+    isOpacity1.value = true
   } 
   else {
     toastColor.value = 'success'
+    isOpacity1.value = true
     inputWord.value = ''
     getRandomWord()
   }
   setTimeout(() => {
-    toastColor.value = ''
-  }, 1000);
+    // toastColor.value = ''
+    isOpacity1.value = false
+  }, 250);
 }
 
+const isOpacity1 = ref(false)
 const toastColor = ref('')
 </script>
 
 <style scoped>
-.fade-out {
-  animation: fadeOut ease 1s;
-  animation-fill-mode: forwards;
-}
 
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+.opacity-1 {
+  opacity: 1;
+}
+.opacity-0 {
+  opacity: 0;
+  transition: opacity 2s ease-out;
 }
 </style>
