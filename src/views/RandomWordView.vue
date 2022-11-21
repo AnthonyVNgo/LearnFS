@@ -12,7 +12,7 @@
           </div>
         </div>
         <div v-else class="d-flex flex-wrap justify-content-center">
-          <div v-for="letter in randomWordArray" class="card ratio ratio-1x1 mx-1" style="min-width: 80px; max-width: 10%;">
+          <div v-for="letter in randomWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
             <img :src="`../../public/images/${letter}.png`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body">
           </div>
         </div>
@@ -25,7 +25,7 @@
           <label for="userInput" class="form-label">
             <h5>Translate the Fingerspelling word</h5>
           </label>
-          <div class="input-group mb-3" :class="{'pulse-green' : boolean && userInputCorrect, 'pulse-red': boolean && !userInputCorrect }">
+          <div class="input-group">
             <input 
               v-model="inputWord" 
               type="text" 
@@ -33,8 +33,6 @@
               id="userInput" 
               :maxlength="randomWordLength" 
               minlength="4" required placeholder="Type here" 
-              pattern="^[a-zA-Z]+" 
-              oninvalid="setCustomValidity('Please submit letters only')" 
               autocomplete="off"
               >
             <button type="button" class="btn btn-dark" @click="handleButtonClick(false)">
@@ -55,7 +53,6 @@
             </button>
           </div>
         </form>
-        <!-- <button @click="resetBoolean" :class="{'pulse-green' : boolean && userInputCorrect, 'pulse-red': boolean && !userInputCorrect }">pulser</button> -->
       </div>
     </div>
   </div>
@@ -94,7 +91,8 @@ function getRandomWord() {
   fetch(`https://random-word-api.herokuapp.com/word?length=${randomWordLength.value}`)
   .then(res => res.json())
   .then(data => {
-    randomWord.value = data[0]
+    randomWord.value = data[0];
+    console.log(randomWord.value);
     loading.value = false
   })
   .catch(err => console.log('error:', err))
@@ -110,27 +108,15 @@ const randomWordArray = computed(() => {
 });
 
 // User Input 
-const boolean = ref(false)
-
-const userInputCorrect = ref(null)
-
-function resetBoolean() {
-  boolean.value = true
-  setTimeout(() => {
-    boolean.value = false
-  }, 350);
-}
-
 let inputWord = ref('')
 
 function checkUserInput() {
-  console.log(inputWord.value)
   if (inputWord.value !== randomWord.value) {
-    resetBoolean()
+    console.log('false value:', inputWord.value)
     userInputCorrect.value = false
   } 
   else {
-    resetBoolean()
+    console.log('true value:', inputWord.value)
     userInputCorrect.value = true
     inputWord.value = ''
     getRandomWord()
@@ -140,28 +126,4 @@ function checkUserInput() {
 </script>
 
 <style scoped>
-.pulse-green {
-  animation: pulse-green 0.3s;
-}
-
-@keyframes pulse-green {
-    0% {
-        box-shadow: 0px 0px 0px 0px ;
-    }
-    100% {
-       box-shadow: 0px 0px 5px 25px rgba(191, 255, 191, 0.654);
-    }
-}
-.pulse-red {
-  animation: pulse-red 0.3s;
-}
-
-@keyframes pulse-red {
-    0% {
-        box-shadow: 0px 0px 0px 0px ;
-    }
-    100% {
-       box-shadow: 0px 0px 5px 25px rgb(255, 179, 179);
-    }
-}
 </style>
