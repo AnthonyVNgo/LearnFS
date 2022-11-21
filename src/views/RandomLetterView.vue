@@ -2,6 +2,40 @@
 <div class="container">
   <div class="row align-items-center" style="height: 50vh;">
     <div class="col">
+      <!-- refactor with slots / child components  -->
+      <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 20px; left: 10px; right: 10px;">
+          <div 
+          v-if="toastColor === 'danger'"
+          class="card bg-danger text-white"
+          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
+          style="width: 500px"
+          >
+            <div class="card-body">
+             Incorrect, try again
+            </div>
+          </div>
+          <div 
+          v-else-if="toastColor === 'warning'"
+          class="card bg-warning"
+          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
+          style="width: 500px"
+          >
+            <div class="card-body">
+             Please use letters only
+            </div>
+          </div>
+          <div 
+          v-else-if="toastColor === 'success'"
+          class="card bg-primary text-white"
+          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
+          style="width: 500px"
+          >
+            <div class="card-body d-flex justify-content-between">
+             <span v-if="correctCount === 1">Good job!</span>
+             <span v-else>Nice! You're on a {{correctCount}} word streak</span>
+            </div>
+          </div>
+        </div>
       <div class="d-flex justify-content-center">
         <div class="card ratio ratio-1x1" style="max-width: 315px;">
           <img :src="`../../public/images/${randomLetter}.png`" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
@@ -16,7 +50,7 @@
         <h5>Enter the correct Fingerspelling letter</h5>
       </label>
       <div class="input-group mb-3">
-        <input type="text" class="form-control form-control" id="randomLetter" v-model="inputLetter" maxlength="1" @keydown="handleKeyDown" placeholder="Type here">
+        <input type="text" class="form-control form-control" id="randomLetter" v-model="inputLetter" maxlength="1" @keydown="handleKeyDown" placeholder="Type here" autocomplete="off">
         <button type="button" class="btn btn-dark" @click="getRandomLetter">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -27,11 +61,8 @@
     </div>
   </div>
 </div>
-<!-- add streak counter  -->
 <!-- convert all pngs to svgs  SGV BABYYYY -->
 <!-- update package stuff  -->
-<!-- add some color and pizzaz  -->
-<!-- probbably add slots / componnents for the card section and the instructions and input section to reuse -->
 
 </template>
 
@@ -50,7 +81,7 @@ import {
   watch 
 } from 'vue';
 
-// app generated random letter   
+// Random Letter   
 let randomLetter = $ref('')
 function getRandomLetter() {
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -61,12 +92,28 @@ onBeforeMount(() => {
   getRandomLetter()
 });
 
-// user input letter
+// User Input Letter
 let inputLetter = ref('')
+
+const isOpacity1 = ref(false)
+const toastColor = ref('')
+const correctCount = ref(0)
+
 function handleKeyDown(event) {
-  if (event.which >= 65 && event.which <= 90) {
+  if (/^[a-zA-Z]+$/.test(inputLetter.value) === false) {
+    toastColor.value = 'warning'
+    console.log('inputLetter value: is false')
+    isOpacity1.value = true
+  } else if (inputLetter.value !== event.key) {
+    toastColor.value = 'danger'
+    isOpacity1.value = true
+    correctCount.value = 0
+  } else if (event.which >= 65 && event.which <= 90) {
     inputLetter.value = event.key
   }
+  setTimeout(() => {
+    isOpacity1.value = false
+  }, 250);
 }
 
 watch(inputLetter, (newValue, oldValue) => {
@@ -113,4 +160,11 @@ watch(inputLetter, (newValue, oldValue) => {
 </script>
 
 <style scoped>
+.opacity-1 {
+  opacity: 1;
+}
+.opacity-0 {
+  opacity: 0;
+  transition: opacity 2.5s ease-out;
+}
 </style>

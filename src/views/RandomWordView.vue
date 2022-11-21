@@ -3,8 +3,8 @@
   <div class="container">
     <div class="row align-items-center" style="height: 50vh; position: relative;">
       <div class="col">
+        <!-- refactor with slots / child components  -->
         <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 20px; left: 10px; right: 10px;">
-          <!-- refactor with slots / child components  -->
           <div 
           v-if="toastColor === 'danger'"
           class="card bg-danger text-white"
@@ -143,6 +143,9 @@ const randomWordArray = computed(() => {
 
 // User Input 
 let inputWord = ref('')
+const isOpacity1 = ref(false)
+const toastColor = ref('')
+const correctCount = ref(0)
 
 function checkUserInput() {
   if (/^[a-zA-Z]+$/.test(inputWord.value) === false) {
@@ -164,11 +167,6 @@ function checkUserInput() {
     isOpacity1.value = false
   }, 250);
 }
-
-const isOpacity1 = ref(false)
-const toastColor = ref('')
-
-const correctCount = ref(0)
 </script>
 
 <style scoped>
