@@ -11,7 +11,7 @@
           style="width: 500px"
           >
             <div class="card-body">
-              Please use letters only
+              Please use letters only. Space, numbers, and special characters aren't allowed
             </div>
           </div>
         </div>
@@ -52,9 +52,7 @@
 import { ref } from 'vue'
 
 const userInput = ref('')
-
 const inputWordArray = ref('')
-
 const isOpacity1 = ref(false)
 const toastColor = ref('')
 
