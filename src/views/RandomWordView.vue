@@ -192,7 +192,6 @@ function checkUserInput() {
 </script>
 
 <style scoped>
-
 .opacity-1 {
   opacity: 1;
 }
