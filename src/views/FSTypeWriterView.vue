@@ -18,7 +18,7 @@
             <h5>Convert letters to Fingerspelling</h5>
           </label>
           <div class="input-group mb-3">
-            <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="16" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Please submit letters only')" placeholder="Type here">
+            <input v-model="inputWord" type="text" class="form-control" id="userInput" maxlength="16" pattern="[a-zA-Z]+" oninvalid="setCustomValidity('Please submit letters only')" placeholder="Type here" autocomplete="off">
           </div>
         </form>
       </div>

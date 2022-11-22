@@ -3,7 +3,6 @@
   <div class="container">
     <div class="row align-items-center" style="height: 50vh; position: relative;">
       <div class="col">
-        <!-- refactor with slots / child components  -->
         <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 20px; left: 10px; right: 10px;">
           <div 
           v-if="toastColor === 'danger'"
