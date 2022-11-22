@@ -1,73 +1,73 @@
 <template>
-  <div class="container">
-    <div class="row align-items-center" style="height: 50vh; position: relative;">
-      <div class="col">
+  <ViewContainer>
 
-        <Toast 
-        :toastColor="toastColor"
-        :isOpacity1="isOpacity1"
-        :correctCount="correctCount"
-        />
+    <template v-slot:toast>
+      <Toast 
+      :toastColor="toastColor"
+      :isOpacity1="isOpacity1"
+      :correctCount="correctCount"
+      />
+    </template>
 
-        <div v-if="loading === true" class="d-flex flex-wrap justify-content-center">
-          <div v-for="letter in randomWordArray" class="ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
-            <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
-              <div class="spinner-grow" role="status">
-              </div>
+    <template v-slot:cards>
+      <div v-if="loading === true" class="d-flex flex-wrap justify-content-center">
+        <div v-for="letter in randomWordArray" class="ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
+          <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+            <div class="spinner-grow" role="status">
             </div>
           </div>
         </div>
-        
-        <div v-else class="d-flex flex-wrap justify-content-center">
-          <div v-for="letter in randomWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
-            <img :src="`../../public/images/${letter}.png`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body">
-          </div>
+      </div>
+
+      <div v-else class="d-flex flex-wrap justify-content-center">
+        <div v-for="letter in randomWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
+          <img :src="`../../public/images/${letter}.png`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body">
         </div>
       </div>
-    </div>
+    </template>
 
-    <div class="row justify-content-center">
-      <div class="col" style="text-align: center; max-width: 400px;">
-        <form @submit.prevent="checkUserInput">
-          <label for="userInput" class="form-label">
-            <h5>Translate the Fingerspelling word</h5>
-          </label>
-          <div class="input-group">
-            <input 
-              v-model="inputWord" 
-              type="text" 
-              class="form-control" 
-              id="userInput" 
-              :maxlength="randomWordLength" 
-              minlength="4" required placeholder="Type here" 
-              autocomplete="off"
-              >
-            <button type="button" class="btn btn-dark" @click="handleButtonClick(false)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-dark" @click="handleButtonClick(true)">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-              </svg>
-            </button>
-            <button type="button" class="btn btn-dark" @click="getRandomWord">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-              </svg>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+    <template v-slot:input>
+      <form @submit.prevent="checkUserInput">
+        <label for="userInput" class="form-label">
+          <h5>Translate the Fingerspelling word</h5>
+        </label>
+        <div class="input-group">
+          <input 
+            v-model="inputWord" 
+            type="text" 
+            class="form-control" 
+            id="userInput" 
+            :maxlength="randomWordLength" 
+            minlength="4" required placeholder="Type here" 
+            autocomplete="off"
+            >
+          <button type="button" class="btn btn-dark" @click="handleButtonClick(false)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+              <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn-dark" @click="handleButtonClick(true)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn-dark" @click="getRandomWord">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+              <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </template>
+  
+  </ViewContainer>
 </template>
 
 <script setup>
 import { ref, computed, onBeforeMount } from 'vue'
 import Toast from '../components/Toast.vue'
+import ViewContainer from '../components/ViewContainer.vue'
 
 // Loading 
 const loading = ref(null)
@@ -95,7 +95,6 @@ function getRandomWord() {
   .then(res => res.json())
   .then(data => {
     randomWord.value = data[0];
-    console.log('randomWord:', randomWord.value);
     loading.value = false
   })
   .catch(err => console.log('error:', err))
