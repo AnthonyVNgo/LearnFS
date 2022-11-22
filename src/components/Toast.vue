@@ -57,24 +57,17 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue'
-// const isOpacity1 = ref(false)
-// const toastColor = ref('')
-
 const props = defineProps({
   toastColor: {
     type: String,
   },
   isOpacity1: {
     type: Boolean,
+  },
+  correctCount: {
+    type: Number,
   }
 })
-
-// const props = defineProps({
-//   toastColor: String,
-//   isOpacity1: Boolean,
-//   correctCount: Number
-// })
 </script>
 
 <style scoped>

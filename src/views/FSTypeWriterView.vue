@@ -7,19 +7,7 @@
         :toastColor="toastColor"
         :isOpacity1="isOpacity1"
         />
-        <!-- <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
-          <div 
-          v-if="toastColor === 'warning'"
-          class="card bg-warning"
-          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
-          style="width: 500px"
-          >
-            <div class="card-body">
-              Please use letters only. Space, numbers, and special characters aren't allowed
-            </div>
-          </div>
-        </div> -->
-
+        
         <div class="d-flex flex-wrap justify-content-center">
           <h1 v-if="!inputWordArray.length">Type + Enter below</h1>
           <div v-else v-for="letter in inputWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
