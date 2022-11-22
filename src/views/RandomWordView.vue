@@ -17,6 +17,7 @@
             </div>
           </div>
         </div>
+        
         <div v-else class="d-flex flex-wrap justify-content-center">
           <div v-for="letter in randomWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
             <img :src="`../../public/images/${letter}.png`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body">
