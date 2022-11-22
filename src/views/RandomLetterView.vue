@@ -2,39 +2,13 @@
 <div class="container">
   <div class="row align-items-center" style="height: 50vh; position: relative;">
     <div class="col">
-      <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
-        <div 
-          v-if="toastColor === 'danger'"
-          class="card bg-danger text-white"
-          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
-          style="width: 500px"
-        >
-          <div class="card-body">
-            Incorrect, try again
-          </div>
-        </div>
-        <div 
-          v-else-if="toastColor === 'warning'"
-          class="card bg-warning"
-          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
-          style="width: 500px"
-        >
-          <div class="card-body">
-            Please use letters only
-          </div>
-        </div>
-        <div 
-          v-else-if="toastColor === 'success'"
-          class="card bg-primary text-white"
-          :class="{'opacity-1' : isOpacity1, 'opacity-1 opacity-0' : !isOpacity1}"
-          style="width: 500px"
-        >
-          <div class="card-body d-flex justify-content-between">
-            <span v-if="correctCount === 1">Good job!</span>
-            <span v-else>Nice! You're on a {{correctCount}} word streak</span>
-          </div>
-        </div>
-      </div>
+     
+      <Toast 
+      :toastColor="toastColor"
+      :isOpacity1="isOpacity1"
+      :correctCount="correctCount"
+      />
+
       <div class="d-flex justify-content-center">
         <div class="card ratio ratio-1x1" style="max-width: 160px;">
           <img :src="`../../public/images/${randomLetter}.png`" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
@@ -65,19 +39,8 @@
 </template>
 
 <script setup>
-import { 
-  ref,   
-  onBeforeMount,
-  onMounted,
-  onBeforeUpdate,
-  onUpdated,
-  onBeforeUnmount,
-  onUnmounted,
-  onActivated,
-  onDeactivated,
-  onErrorCaptured,
-  watch 
-} from 'vue';
+import { ref, onBeforeMount } from 'vue';
+import Toast from '../components/Toast.vue'
 
 // Random Letter   
 let randomLetter = $ref('')
@@ -92,7 +55,6 @@ onBeforeMount(() => {
 
 // User Input Letter
 let userInput = ref('')
-
 const isOpacity1 = ref(false)
 const toastColor = ref('')
 const correctCount = ref(0)
@@ -116,6 +78,20 @@ function checkInput() {
     isOpacity1.value = false
   }, 250);
 }
+
+// import { 
+//   ref,   
+//   onBeforeMount,
+//   onMounted,
+//   onBeforeUpdate,
+//   onUpdated,
+//   onBeforeUnmount,
+//   onUnmounted,
+//   onActivated,
+//   onDeactivated,
+//   onErrorCaptured,
+//   watch 
+// } from 'vue';
 
 // beforeDestroy() {
 // 	window.removeEventListener('keypress', this._keyListener);
@@ -151,11 +127,4 @@ function checkInput() {
 </script>
 
 <style scoped>
-.opacity-1 {
-  opacity: 1;
-}
-.opacity-0 {
-  opacity: 0;
-  transition: opacity 2.5s ease-out;
-}
 </style>

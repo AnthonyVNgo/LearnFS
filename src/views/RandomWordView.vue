@@ -136,13 +136,3 @@ function checkUserInput() {
   }, 250);
 }
 </script>
-
-<style scoped>
-.opacity-1 {
-  opacity: 1;
-}
-.opacity-0 {
-  opacity: 0;
-  transition: opacity 2.5s ease-out;
-}
-</style>
