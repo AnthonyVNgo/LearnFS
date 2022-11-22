@@ -1,5 +1,5 @@
 <template>
-  <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 20px; left: 10px; right: 10px;">
+  <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 20px; left: 10px; right: 10px; z-index: 5;">
     <div 
     v-if="toastColor === 'danger'"
     class="card bg-danger text-white"
@@ -32,7 +32,7 @@
           </svg>
         </span>
         <span>
-          Please use letters only. Space, numbers, and special characters aren't allowed
+          Invalid characters, use letters only
         </span>
       </div>
     </div>
@@ -56,13 +56,33 @@
   </div>
 </template>
 
-<script>
-const isOpacity1 = ref(false)
-const toastColor = ref('')
+<script setup>
+// import { ref } from 'vue'
+// const isOpacity1 = ref(false)
+// const toastColor = ref('')
 
-defineProps({
-  toastColor,
-  isOpacity1,
-  correctCount
+const props = defineProps({
+  toastColor: {
+    type: String,
+  },
+  isOpacity1: {
+    type: Boolean,
+  }
 })
+
+// const props = defineProps({
+//   toastColor: String,
+//   isOpacity1: Boolean,
+//   correctCount: Number
+// })
 </script>
+
+<style scoped>
+.opacity-1 {
+  opacity: 1;
+}
+.opacity-0 {
+  opacity: 0;
+  transition: opacity 2.5s ease-out;
+}
+</style>

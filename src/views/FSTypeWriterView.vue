@@ -3,7 +3,11 @@
     <div class="row align-items-center" style="height: 50vh; position: relative;">
       <div class="col">
 
-        <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
+        <Toast 
+        :toastColor="toastColor"
+        :isOpacity1="isOpacity1"
+        />
+        <!-- <div class="card-toast-container d-flex justify-content-center" style="position: absolute; top: 10px; left: 10px; right: 10px;">
           <div 
           v-if="toastColor === 'warning'"
           class="card bg-warning"
@@ -14,7 +18,7 @@
               Please use letters only. Space, numbers, and special characters aren't allowed
             </div>
           </div>
-        </div>
+        </div> -->
 
         <div class="d-flex flex-wrap justify-content-center">
           <h1 v-if="!inputWordArray.length">Type + Enter below</h1>
@@ -50,6 +54,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import Toast from '../components/Toast.vue'
 
 const userInput = ref('')
 const inputWordArray = ref('')
