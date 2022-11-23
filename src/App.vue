@@ -1,9 +1,11 @@
 <template>
   <header>
-    <Navbar />
+    <Navbar 
+    :isTimeAttackOn="isTimeAttackOn"
+    />
   </header>
 
-  <RouterView />
+  <RouterView @startTimeAttack="listenForEmit"/>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -23,6 +25,14 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
+
+const isTimeAttackOn = ref(false)
+
+function listenForEmit() {
+  console.log('bang')
+  isTimeAttackOn.value = true
+}
 </script>

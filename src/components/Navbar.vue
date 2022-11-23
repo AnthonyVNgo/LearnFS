@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar navbar-expand-lg bg-light">
+<nav v-if="!isTimeAttackOn" class="navbar navbar-expand-lg bg-light">
   <div class="container">
     <RouterLink class="navbar-brand d-lg-none" to="/">LearnFS.io</RouterLink>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,4 +25,17 @@
     </div>
   </div>
 </nav>
+<nav v-else class="">
+  <div class="progress">
+    <div class="progress-bar progress-bar-striped" role="progressbar" aria-label="Default striped example" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</nav>
 </template>
+
+<script setup>
+const props = defineProps({
+  isTimeAttackOn: {
+    type: Boolean,
+  }
+})
+</script>

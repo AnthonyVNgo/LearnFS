@@ -27,7 +27,7 @@
     </template>
 
     <template v-slot:input>
-      <form @submit.prevent="checkUserInput">
+      <form @submit.prevent="handleFormSubmission">
         <label for="userInput" class="form-label">
           <h5>Translate the Fingerspelling word</h5>
         </label>
@@ -41,17 +41,17 @@
             minlength="4" required placeholder="Type here" 
             autocomplete="off"
             >
-          <button type="button" class="btn btn-dark" @click="handleLengthButtonClick(false)">
+          <button type="button" class="btn btn-dark" @click="handleLengthButtonClick(false)" :disabled="isTimeAttackOn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
               <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
             </svg>
           </button>
-          <button type="button" class="btn btn-dark" @click="handleLengthButtonClick(true)">
+          <button type="button" class="btn btn-dark" @click="handleLengthButtonClick(true)" :disabled="isTimeAttackOn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
           </button>
-          <button type="button" class="btn btn-dark" @click="handleResetButtonClick">
+          <button type="button" class="btn btn-dark" @click="handleResetButtonClick" :disabled="isTimeAttackOn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
               <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -59,7 +59,7 @@
           </button>
         </div>
       </form>
-      <button class="btn btn-dark mt-3" @click="handleTimeAttackBtn">
+      <button class="btn btn-dark mt-3" @click="handleTimeAttackBtn" :disabled="isTimeAttackOn">
         Time Attack
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
           <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
@@ -67,6 +67,7 @@
           <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
         </svg>
       </button>
+      <button @click="$emit('startTimeAttack')">test</button>
     </template>
   
   </ViewContainer>
@@ -153,30 +154,78 @@ const isTimeAttackOn = ref(false)
 
 function handleTimeAttackBtn() {
   isTimeAttackOn.value = true
-  let intcount = 0
-  const myInterval = setInterval(() => {
-    intcount++
-    console.log(intcount)
+  correctCount.value = 0
+  // emit('startTimeAttack')
+  countdown321()
+}
+
+function countdown321() {
+  let count = 3
+  const interval = setInterval(() => {
+    count--
   }, 1000);
-  console.log(isTimeAttackOn.value)
+  setTimeout(() => {
+    correctCount.value = 0
+    clearInterval(interval)
+    getRandomWord()
+    countdown30()
+  }, 3000);
+}
+
+function countdown30() {
+  let count = 30
+  const myInterval = setInterval(() => {
+    console.log(count)
+    count--
+  }, 1000);
   setTimeout(() => {
     isTimeAttackOn.value = false
     clearInterval(myInterval);
-    console.log(isTimeAttackOn.value)
+    console.log('incorrect:', incorrectCount.value)
+    console.log('correct:', correctCount.value)
   }, 30000);
 }
 
-function countdown() {
-  let timeleft = 30
+const incorrectCount = ref(0)
+
+function checkUserInputTimeAttack() {
+  if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
+    toastColor.value = 'warning'
+    isOpacity1.value = true
+  } else if (userInput.value !== randomWord.value) {
+    toastColor.value = 'danger'
+    isOpacity1.value = true
+    incorrectCount.value++
+  } 
+  else {
+    toastColor.value = 'success'
+    isOpacity1.value = true
+    userInput.value = ''
+    correctCount.value++
+    getRandomWord()
+  }
+  setTimeout(() => {
+    isOpacity1.value = false
+  }, 250);
 }
 
-// reset count to 0
-// countdown 3.. 2.. 1..
+
+function handleFormSubmission() {
+  if (!isTimeAttackOn) {
+    checkUserInput()
+  } else if (isTimeAttackOn) {
+    checkUserInputTimeAttack()
+  }
+}
+
+// make countdown 3.. 2.. 1.. visible
 // re-use toast animation but quicker fade time 
-// hide navbar 
+// hide navbar || disable buttons
+// if time attack is on, then replace navbar with bootstrap progress bar
+// conditional progress bar color from blue to yellow to red via conditional classes 
+// if percentage is > x then color change 
 // show 30 second countdown timer
-// if time attack button is clicked, then disable the time attack button from being clicked again 
-// keep track of correct words 
-// show percentage 
+
+// probably need to emit data up to parent component to hide nav 
 
 </script>
