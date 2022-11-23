@@ -12,7 +12,7 @@
       <div class="d-flex flex-wrap justify-content-center">
         <h1 v-if="!inputWordArray.length">Type + Enter below</h1>
         <div v-else v-for="letter in inputWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
-          <img :src="`../../public/svg/${letter}.svg`" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
+          <img :src="`../../public/svg/${letter}.svg`" :alt="letter"  style="object-fit: contain;" class="card-body">
         </div>
       </div>
     </template>
@@ -28,6 +28,7 @@
           type="text" 
           class="form-control" 
           id="userInput" 
+          minlength="1"
           maxlength="16" 
           placeholder="Type here + Enter" 
           autocomplete="off">
@@ -55,7 +56,9 @@ const isOpacity1 = ref(false)
 const toastColor = ref('')
 
 function checkUserInput() {
-  if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
+  if (userInput.value === '') {
+    return
+  } else if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
     toastColor.value = 'warning'
     isOpacity1.value = true
   } else {
@@ -77,6 +80,9 @@ function clearUserInput() {
 }
 
 function handleFormSubmission() {
+  if (userInput.value === '') {
+    clearUserInput()
+  }
   checkUserInput()
 }
 
