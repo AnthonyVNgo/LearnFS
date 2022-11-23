@@ -23,7 +23,7 @@
           <h5>Enter the correct Fingerspelling letter</h5>
         </label>
         <div class="input-group mb-3">
-          <input type="text" class="form-control form-control" id="randomLetter" v-model="userInput" maxlength="1" placeholder="Type here" autocomplete="off">
+          <input type="text" class="form-control form-control" id="randomLetter" v-model="userInput" minlength="1" maxlength="1" placeholder="Type here" autocomplete="off">
           <button type="button" class="btn btn-dark" @click="getRandomLetter">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
@@ -41,11 +41,11 @@
 import { ref, onBeforeMount } from 'vue';
 import Toast from '../components/Toast.vue'
 import ViewContainer from '../components/ViewContainer.vue'
-// import test from '../../public/svg'
 
 // Random Letter   
 const randomLetter = $ref('')
 function getRandomLetter() {
+  clearInput()
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
   randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)]
 }
@@ -64,10 +64,12 @@ function checkInput() {
   if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
     toastColor.value = 'warning'
     isOpacity1.value = true
+    clearInput()
   } else if (userInput.value !== randomLetter) {
     toastColor.value = 'danger'
     isOpacity1.value = true
     correctCount.value = 0
+    clearInput()
   } else {
     toastColor.value = 'success'
     isOpacity1.value = true
@@ -78,5 +80,9 @@ function checkInput() {
   setTimeout(() => {
     isOpacity1.value = false
   }, 250);
+}
+
+function clearInput() {
+  userInput.value = ''
 }
 </script>
