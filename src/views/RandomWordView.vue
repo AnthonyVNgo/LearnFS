@@ -153,19 +153,30 @@ const isTimeAttackOn = ref(false)
 
 function handleTimeAttackBtn() {
   isTimeAttackOn.value = true
+  let intcount = 0
+  const myInterval = setInterval(() => {
+    intcount++
+    console.log(intcount)
+  }, 1000);
   console.log(isTimeAttackOn.value)
   setTimeout(() => {
     isTimeAttackOn.value = false
+    clearInterval(myInterval);
     console.log(isTimeAttackOn.value)
   }, 30000);
+}
+
+function countdown() {
+  let timeleft = 30
 }
 
 // reset count to 0
 // countdown 3.. 2.. 1..
 // re-use toast animation but quicker fade time 
 // hide navbar 
-// show 30 second countdown 
+// show 30 second countdown timer
 // if time attack button is clicked, then disable the time attack button from being clicked again 
 // keep track of correct words 
+// show percentage 
 
 </script>
