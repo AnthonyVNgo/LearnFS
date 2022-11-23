@@ -10,9 +10,14 @@
     </template>
 
     <template v-slot:cards>
-      <div class="d-flex justify-content-center">
+      <!-- <div class="d-flex justify-content-center">
         <div class="card ratio ratio-1x1" style="max-width: 160px;">
           <img :src="`../../public/images/${randomLetter}.png`" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
+        </div>
+      </div> -->
+      <div class="d-flex justify-content-center">
+        <div class="card ratio ratio-1x1" style="max-width: 160px;">
+          <img src="''../../public/svg/a.svg" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
         </div>
       </div>
     </template>
@@ -41,6 +46,7 @@
 import { ref, onBeforeMount } from 'vue';
 import Toast from '../components/Toast.vue'
 import ViewContainer from '../components/ViewContainer.vue'
+// import test from '../../public/svg'
 
 // Random Letter   
 const randomLetter = $ref('')
