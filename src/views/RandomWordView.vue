@@ -33,7 +33,7 @@
         </label>
         <div class="input-group">
           <input 
-            v-model="inputWord" 
+            v-model="userInput" 
             type="text" 
             class="form-control" 
             id="userInput" 
@@ -41,17 +41,17 @@
             minlength="4" required placeholder="Type here" 
             autocomplete="off"
             >
-          <button type="button" class="btn btn-dark" @click="handleButtonClick(false)">
+          <button type="button" class="btn btn-dark" @click="handleLengthButtonClick(false)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
               <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
             </svg>
           </button>
-          <button type="button" class="btn btn-dark" @click="handleButtonClick(true)">
+          <button type="button" class="btn btn-dark" @click="handleLengthButtonClick(true)">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
             </svg>
           </button>
-          <button type="button" class="btn btn-dark" @click="getRandomWord">
+          <button type="button" class="btn btn-dark" @click="handleResetButtonClick">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
               <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -75,7 +75,7 @@ const loading = ref(null)
 // Random Word Length 
 const randomWordLength = ref(4)
  
-function handleButtonClick(boolean) {
+function handleLengthButtonClick(boolean) {
   if (boolean === true && randomWordLength.value <= 11) {
     randomWordLength.value++
     getRandomWord()
@@ -84,6 +84,11 @@ function handleButtonClick(boolean) {
     randomWordLength.value--
     getRandomWord()
   }
+}
+
+function handleResetButtonClick() {
+  userInput.value = ''
+  getRandomWord()
 }
 
 // Random Word 
@@ -110,16 +115,16 @@ const randomWordArray = computed(() => {
 });
 
 // User Input 
-let inputWord = ref('')
+const userInput = ref('')
 const isOpacity1 = ref(false)
 const toastColor = ref('')
 const correctCount = ref(0)
 
 function checkUserInput() {
-  if (/^[a-zA-Z]+$/.test(inputWord.value) === false) {
+  if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
     toastColor.value = 'warning'
     isOpacity1.value = true
-  } else if (inputWord.value !== randomWord.value) {
+  } else if (userInput.value !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
     correctCount.value = 0
@@ -127,7 +132,7 @@ function checkUserInput() {
   else {
     toastColor.value = 'success'
     isOpacity1.value = true
-    inputWord.value = ''
+    userInput.value = ''
     correctCount.value++
     getRandomWord()
   }

@@ -18,7 +18,7 @@
     </template>
 
     <template v-slot:input>
-      <form @submit.prevent="checkInput">
+      <form @submit.prevent="handleFormSubmission">
         <label for="userInput" class="form-label">
           <h5>Convert letters to Fingerspelling</h5>
         </label>
@@ -31,7 +31,7 @@
           maxlength="16" 
           placeholder="Type here + Enter" 
           autocomplete="off">
-          <button type="button" class="btn btn-dark" @click="clearInput">
+          <button type="button" class="btn btn-dark" @click="handleResetButtonClick">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
               <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
               <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
@@ -54,7 +54,7 @@ const inputWordArray = ref('')
 const isOpacity1 = ref(false)
 const toastColor = ref('')
 
-function checkInput() {
+function checkUserInput() {
   if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
     toastColor.value = 'warning'
     isOpacity1.value = true
@@ -71,8 +71,16 @@ function generateInputWordArray() {
   inputWordArray.value = inputWordSplit
 }
 
-function clearInput() {
+function clearUserInput() {
   userInput.value = ''
   generateInputWordArray()
+}
+
+function handleFormSubmission() {
+  checkUserInput()
+}
+
+function handleResetButtonClick() {
+  clearUserInput()
 }
 </script>
