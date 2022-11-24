@@ -5,7 +5,9 @@
     />
   </header>
 
-  <RouterView @startTimeAttack="listenForEmit"/>
+  <RouterView 
+  :isTimeAttackOn="isTimeAttackOn"
+  @emitTimeAttack="handleTimeAttackEmit"/>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -21,18 +23,51 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 
 const isTimeAttackOn = ref(false)
+const timerValue = ref(0)
 
-function listenForEmit() {
-  console.log('bang')
+function handleTimeAttackEmit() {
   isTimeAttackOn.value = true
+  setTimeout(() => {
+    isTimeAttackOn.value = false
+  }, 30000);
 }
+
+function tMinus3() {
+  let count = 3
+  const interval = setInterval(() => {
+    count--
+  }, 1000);
+  setTimeout(() => {
+    clearInterval(interval)
+    tMinus30()
+  }, 3000);
+}
+
+function tMinus30() {
+  let count = 30
+  const myInterval = setInterval(() => {
+    console.log(count)
+    count--
+  }, 1000);
+  setTimeout(() => {
+    isTimeAttackOn.value = false
+    clearInterval(myInterval);
+    console.log('incorrect:', incorrectCount.value)
+    console.log('correct:', correctCount.value)
+  }, 30000);
+}
+
+watch(isTimeAttackOn, (newBooleanValue, oldBooleanValue) => {
+  if (newBooleanValue === true) {
+    tMinus3()
+  }
+})
 </script>

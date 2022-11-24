@@ -25,17 +25,28 @@
     </div>
   </div>
 </nav>
-<nav v-else class="">
-  <div class="progress">
-    <div class="progress-bar progress-bar-striped" role="progressbar" aria-label="Default striped example" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+<nav v-else style="height: 56px;">
+  <div class="progress" style="border-radius: 0px; height: 55%;">
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 57.9%" aria-valuemax="100"></div>
   </div>
 </nav>
 </template>
 
 <script setup>
+import { ref, watch } from 'vue'
+
+watch(()=>props.isTimeAttackOn, (newBooleanValue, oldBooleanValue) => {
+  if (newBooleanValue === true) {
+    console.log('hide nav bar & start progress bar loader')
+  }
+})
+
 const props = defineProps({
   isTimeAttackOn: {
     type: Boolean,
   }
 })
+// conditional progress bar color from blue to yellow to red via conditional classes 
+// if percentage is > x then color change 
+// show 30 second countdown timer
 </script>

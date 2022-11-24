@@ -67,7 +67,6 @@
           <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
         </svg>
       </button>
-      <button @click="$emit('startTimeAttack')">test</button>
     </template>
   
   </ViewContainer>
@@ -81,28 +80,8 @@ import ViewContainer from '../components/ViewContainer.vue'
 // Loading 
 const loading = ref(null)
 
-// Random Word Length 
-const randomWordLength = ref(4)
- 
-function handleLengthButtonClick(boolean) {
-  if (boolean === true && randomWordLength.value <= 11) {
-    randomWordLength.value++
-    getRandomWord()
-  } 
-  else if(boolean === false && randomWordLength.value !== 4) {
-    randomWordLength.value--
-    getRandomWord()
-  }
-}
-
-function handleResetButtonClick() {
-  userInput.value = ''
-  getRandomWord()
-}
-
 // Random Word 
 const randomWord = ref('')
-
 function getRandomWord() {
   loading.value = true
   fetch(`https://random-word-api.herokuapp.com/word?length=${randomWordLength.value}`)
@@ -122,6 +101,25 @@ onBeforeMount(() => {
 const randomWordArray = computed(() => {
   return randomWord.value.split('')
 });
+
+// Change Word Length 
+const randomWordLength = ref(4)
+function handleLengthButtonClick(boolean) {
+  if (boolean === true && randomWordLength.value <= 11) {
+    randomWordLength.value++
+    getRandomWord()
+  } 
+  else if(boolean === false && randomWordLength.value !== 4) {
+    randomWordLength.value--
+    getRandomWord()
+  }
+}
+
+// Reset Word Value & User Input
+function handleResetButtonClick() {
+  userInput.value = ''
+  getRandomWord()
+}
 
 // User Input 
 const userInput = ref('')
@@ -150,44 +148,26 @@ function checkUserInput() {
   }, 250);
 }
 
-const isTimeAttackOn = ref(false)
+
+// Time Attack 
+const props = defineProps({
+  isTimeAttackOn: {
+    type: Boolean,
+  }
+})
+
+const emitTimeAttack = defineEmits('emitTimeAttack')
 
 function handleTimeAttackBtn() {
-  isTimeAttackOn.value = true
-  correctCount.value = 0
-  // emit('startTimeAttack')
-  countdown321()
-}
-
-function countdown321() {
-  let count = 3
-  const interval = setInterval(() => {
-    count--
-  }, 1000);
+  emitTimeAttack('emitTimeAttack')
   setTimeout(() => {
     correctCount.value = 0
-    clearInterval(interval)
     getRandomWord()
-    countdown30()
   }, 3000);
 }
 
-function countdown30() {
-  let count = 30
-  const myInterval = setInterval(() => {
-    console.log(count)
-    count--
-  }, 1000);
-  setTimeout(() => {
-    isTimeAttackOn.value = false
-    clearInterval(myInterval);
-    console.log('incorrect:', incorrectCount.value)
-    console.log('correct:', correctCount.value)
-  }, 30000);
-}
-
+// Time Attack User Input 
 const incorrectCount = ref(0)
-
 function checkUserInputTimeAttack() {
   if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
     toastColor.value = 'warning'
@@ -209,6 +189,7 @@ function checkUserInputTimeAttack() {
   }, 250);
 }
 
+// use nested if statement for user input validation 
 
 function handleFormSubmission() {
   if (!isTimeAttackOn) {
@@ -217,15 +198,4 @@ function handleFormSubmission() {
     checkUserInputTimeAttack()
   }
 }
-
-// make countdown 3.. 2.. 1.. visible
-// re-use toast animation but quicker fade time 
-// hide navbar || disable buttons
-// if time attack is on, then replace navbar with bootstrap progress bar
-// conditional progress bar color from blue to yellow to red via conditional classes 
-// if percentage is > x then color change 
-// show 30 second countdown timer
-
-// probably need to emit data up to parent component to hide nav 
-
 </script>
