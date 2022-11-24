@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div v-else class="d-flex flex-wrap justify-content-center">
+      <div v-else class="d-flex flex-w  rap justify-content-center">
         <div v-for="letter in randomWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
           <img :src="`../../public/svg/${letter}.svg`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body">
         </div>
@@ -150,12 +150,6 @@ function checkUserInput() {
 
 
 // Time Attack 
-const props = defineProps({
-  isTimeAttackOn: {
-    type: Boolean,
-  }
-})
-
 const emitTimeAttack = defineEmits('emitTimeAttack')
 
 function handleTimeAttackBtn() {
@@ -165,6 +159,11 @@ function handleTimeAttackBtn() {
     getRandomWord()
   }, 3000);
 }
+const props = defineProps({
+  isTimeAttackOn: {
+    type: Boolean,
+  }
+})
 
 // Time Attack User Input 
 const incorrectCount = ref(0)
@@ -188,13 +187,12 @@ function checkUserInputTimeAttack() {
     isOpacity1.value = false
   }, 250);
 }
-
 // use nested if statement for user input validation 
 
 function handleFormSubmission() {
-  if (!isTimeAttackOn) {
+  if (!props.isTimeAttackOn) {
     checkUserInput()
-  } else if (isTimeAttackOn) {
+  } else if (props.isTimeAttackOn) {
     checkUserInputTimeAttack()
   }
 }

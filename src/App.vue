@@ -2,6 +2,7 @@
   <header>
     <Navbar 
     :isTimeAttackOn="isTimeAttackOn"
+    :timerValue="timerValue"
     />
   </header>
 
@@ -35,9 +36,10 @@ const timerValue = ref(0)
 
 function handleTimeAttackEmit() {
   isTimeAttackOn.value = true
-  setTimeout(() => {
-    isTimeAttackOn.value = false
-  }, 30000);
+  // setTimeout(() => {
+  //   isTimeAttackOn.value = false
+  // }, 30000);
+  tMinus3()
 }
 
 function tMinus3() {
@@ -46,8 +48,8 @@ function tMinus3() {
     count--
   }, 1000);
   setTimeout(() => {
-    clearInterval(interval)
     tMinus30()
+    clearInterval(interval)
   }, 3000);
 }
 
@@ -56,18 +58,20 @@ function tMinus30() {
   const myInterval = setInterval(() => {
     console.log(count)
     count--
+    timerValue.value++
   }, 1000);
   setTimeout(() => {
     isTimeAttackOn.value = false
+    timerValue.value = 0
     clearInterval(myInterval);
-    console.log('incorrect:', incorrectCount.value)
-    console.log('correct:', correctCount.value)
+    // console.log('incorrect:', incorrectCount.value)
+    // console.log('correct:', correctCount.value)
   }, 30000);
 }
 
-watch(isTimeAttackOn, (newBooleanValue, oldBooleanValue) => {
-  if (newBooleanValue === true) {
-    tMinus3()
-  }
-})
+// watch(isTimeAttackOn, (newBooleanValue, oldBooleanValue) => {
+//   if (newBooleanValue === true) {
+//     tMinus3()
+//   }
+// })
 </script>
