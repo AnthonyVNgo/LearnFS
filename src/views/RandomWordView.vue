@@ -210,6 +210,20 @@ watch(() => props.isTimeAttackOn, (newBoolean, oldBoolean) => {
   }
 })
 
+const fieldGoalPercentage = computed(() => {
+  if (props.correct === 0 && props.attempts === 0) {
+    return '0%'
+  } else {
+    return props.correct / props.attempts * 100 + '%'
+  }
+})
+
+const isResultsModalOpen = ref(false)
+
+function handleBackButtonClick() {
+  isResultsModalOpen.value = false
+}
+
 const props = defineProps({
   isTimeAttackOn: {
     type: Boolean,
@@ -221,20 +235,4 @@ const props = defineProps({
     type: Number,
   }
 })
-
-const fieldGoalPercentage = computed(() => {
-  if (props.correct === 0 && props.attempts === 0) {
-    return '0%'
-  } else {
-    return props.correct / props.attempts * 100 + '%'
-  }
-})
-
-
-const isResultsModalOpen = ref(false)
-
-function handleBackButtonClick() {
-  isResultsModalOpen.value = false
-}
-
 </script>

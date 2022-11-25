@@ -2,7 +2,8 @@
   <header>
     <Navbar 
     :isTimeAttackOn="isTimeAttackOn"
-    :timerValue="timerValue"
+    :thirtySecondTimer="thirtySecondTimer"
+    :threeSecondTimer="threeSecondTimer"
     />
   </header>
 
@@ -36,7 +37,6 @@ import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 
 const isTimeAttackOn = ref(false)
-const timerValue = ref(0)
 
 function handleTimeAttackEmit() {
   isTimeAttackOn.value = true
@@ -46,33 +46,31 @@ function handleTimeAttackEmit() {
 const correctCount = ref(0)
 const attemptCount = ref(0)
 function calculateAccuracy(emitValue) {
-  console.log('emitValue:', emitValue)
-  console.log('field goal percentage:', emitValue[0] / emitValue[1])
   correctCount.value = emitValue[0]
   attemptCount.value = emitValue[1]
 }
 
+const threeSecondTimer = ref(3)
 function countFrom3() {
-  let count = 3
   const interval = setInterval(() => {
-    count--
+    threeSecondTimer.value--
   }, 1000);
   setTimeout(() => {
+    threeSecondTimer.value = 0
     countFrom30()
     clearInterval(interval)
   }, 3000);
 }
 
+
+const thirtySecondTimer = ref(0)
 function countFrom30() {
-  let count = 30
   const myInterval = setInterval(() => {
-    console.log(count)
-    count--
-    timerValue.value++
+    thirtySecondTimer.value++
   }, 1000);
   setTimeout(() => {
     isTimeAttackOn.value = false
-    timerValue.value = 0
+    thirtySecondTimer.value = 0
     clearInterval(myInterval);
   }, 30000);
 }

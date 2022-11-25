@@ -27,17 +27,22 @@
 </nav>
 <nav v-else style="height: 56px;">
   <div class="progress" style="border-radius: 0px; height: 100%;">
-    <div class="progress-bar progress-bar-striped" role="progressbar" style="" aria-valuemax="100" :style="{ width: timerValue / 30 * 100 + '%'}"></div>
+    <div class="progress-bar progress-bar-striped" role="progressbar" style="" aria-valuemax="100" :style="{ width: thirtySecondTimer / 30 * 100 + '%'}"></div>
   </div>
+  <div v-if="threeSecondTimer !== 0" class="d-flex justify-content-center">{{threeSecondTimer}}</div>
 </nav>
 </template>
 
 <script setup>
+
 const props = defineProps({
   isTimeAttackOn: {
     type: Boolean,
   },
-  timerValue: {
+  thirtySecondTimer: {
+    type: Number,
+  },
+  threeSecondTimer: {
     type: Number,
   }
 })
