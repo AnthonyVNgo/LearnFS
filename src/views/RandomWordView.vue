@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div v-else class="d-flex flex-w  rap justify-content-center">
+      <div v-else class="d-flex flex-wrap justify-content-center">
         <div v-for="letter in randomWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
           <img :src="`../../public/svg/${letter}.svg`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body">
         </div>
@@ -71,11 +71,20 @@
     </template>
   
   </ViewContainer>
-  <div v-else>
-    <span>correct{{correct}}</span>
-    <span>attempts{{attempts}}</span>
-    <span>accuracy: computed of correct divided bby attempts{{fieldGoalPercentage}}</span>
-    <button @click="handleBackButtonClick">back</button>
+  <div v-else class="container">
+    <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
+      <div class="col-auto">
+        <h3>Correct: {{correct}}</h3>
+        <h3>Attempts: {{attempts}}</h3>
+        <h3>Accuracy: {{fieldGoalPercentage}}</h3>
+        <button class="btn btn-dark mt-3" @click="handleBackButtonClick">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+          </svg>
+          Back 
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -214,7 +223,11 @@ const props = defineProps({
 })
 
 const fieldGoalPercentage = computed(() => {
-  return props.correct / props.attempts * 100 + '%'
+  if (props.correct === 0 && props.attempts === 0) {
+    return '0%'
+  } else {
+    return props.correct / props.attempts * 100 + '%'
+  }
 })
 
 
