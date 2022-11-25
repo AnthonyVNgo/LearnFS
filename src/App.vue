@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
 
@@ -36,9 +36,6 @@ const timerValue = ref(0)
 
 function handleTimeAttackEmit() {
   isTimeAttackOn.value = true
-  // setTimeout(() => {
-  //   isTimeAttackOn.value = false
-  // }, 30000);
   tMinus3()
 }
 
@@ -64,14 +61,6 @@ function tMinus30() {
     isTimeAttackOn.value = false
     timerValue.value = 0
     clearInterval(myInterval);
-    // console.log('incorrect:', incorrectCount.value)
-    // console.log('correct:', correctCount.value)
   }, 30000);
 }
-
-// watch(isTimeAttackOn, (newBooleanValue, oldBooleanValue) => {
-//   if (newBooleanValue === true) {
-//     tMinus3()
-//   }
-// })
 </script>

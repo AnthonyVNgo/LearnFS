@@ -6,6 +6,7 @@
       :toastColor="toastColor"
       :isOpacity1="isOpacity1"
       :correctCount="correctCount"
+      :isTimeAttackOn="isTimeAttackOn"
       />
     </template>
 
@@ -128,7 +129,8 @@ const toastColor = ref('')
 const correctCount = ref(0)
 
 function checkUserInput() {
-  if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
+  if (!props.isTimeAttackOn) {
+    if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
     toastColor.value = 'warning'
     isOpacity1.value = true
   } else if (userInput.value !== randomWord.value) {
@@ -146,8 +148,28 @@ function checkUserInput() {
   setTimeout(() => {
     isOpacity1.value = false
   }, 250);
+  } else if (props.isTimeAttackOn) {
+    if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
+    toastColor.value = 'warning'
+    isOpacity1.value = true
+  } else if (userInput.value !== randomWord.value) {
+    toastColor.value = 'danger'
+    isOpacity1.value = true
+    incorrectCount.value++
+  } 
+  else {
+    toastColor.value = 'success'
+    isOpacity1.value = true
+    userInput.value = ''
+    correctCount.value++
+    getRandomWord()
+  }
+  setTimeout(() => {
+    isOpacity1.value = false
+  }, 250);
+  }
+  
 }
-
 
 // Time Attack 
 const emitTimeAttack = defineEmits('emitTimeAttack')
@@ -167,33 +189,8 @@ const props = defineProps({
 
 // Time Attack User Input 
 const incorrectCount = ref(0)
-function checkUserInputTimeAttack() {
-  if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
-    toastColor.value = 'warning'
-    isOpacity1.value = true
-  } else if (userInput.value !== randomWord.value) {
-    toastColor.value = 'danger'
-    isOpacity1.value = true
-    incorrectCount.value++
-  } 
-  else {
-    toastColor.value = 'success'
-    isOpacity1.value = true
-    userInput.value = ''
-    correctCount.value++
-    getRandomWord()
-  }
-  setTimeout(() => {
-    isOpacity1.value = false
-  }, 250);
-}
-// use nested if statement for user input validation 
 
 function handleFormSubmission() {
-  if (!props.isTimeAttackOn) {
-    checkUserInput()
-  } else if (props.isTimeAttackOn) {
-    checkUserInputTimeAttack()
-  }
+  checkUserInput()
 }
 </script>
