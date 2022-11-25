@@ -8,7 +8,11 @@
 
   <RouterView 
   :isTimeAttackOn="isTimeAttackOn"
-  @emitTimeAttack="handleTimeAttackEmit"/>
+  :correct="correctCount"
+  :attempts="attemptCount"
+  @emitTimeAttack="handleTimeAttackEmit"
+  @emitCount="calculateAccuracy"
+  />
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -36,21 +40,30 @@ const timerValue = ref(0)
 
 function handleTimeAttackEmit() {
   isTimeAttackOn.value = true
-  tMinus3()
+  countFrom3()
 }
 
-function tMinus3() {
+const correctCount = ref(0)
+const attemptCount = ref(0)
+function calculateAccuracy(emitValue) {
+  console.log('emitValue:', emitValue)
+  console.log('field goal percentage:', emitValue[0] / emitValue[1])
+  correctCount.value = emitValue[0]
+  attemptCount.value = emitValue[1]
+}
+
+function countFrom3() {
   let count = 3
   const interval = setInterval(() => {
     count--
   }, 1000);
   setTimeout(() => {
-    tMinus30()
+    countFrom30()
     clearInterval(interval)
   }, 3000);
 }
 
-function tMinus30() {
+function countFrom30() {
   let count = 30
   const myInterval = setInterval(() => {
     console.log(count)

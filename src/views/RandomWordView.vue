@@ -1,5 +1,5 @@
 <template>
-  <ViewContainer>
+  <ViewContainer v-if="!isResultsModalOpen">
 
     <template v-slot:toast>
       <Toast 
@@ -71,10 +71,16 @@
     </template>
   
   </ViewContainer>
+  <div v-else>
+    <span>correct{{correct}}</span>
+    <span>attempts{{attempts}}</span>
+    <span>accuracy: computed of correct divided bby attempts{{fieldGoalPercentage}}</span>
+    <button @click="handleBackButtonClick">back</button>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount, watch } from 'vue'
 import Toast from '../components/Toast.vue'
 import ViewContainer from '../components/ViewContainer.vue'
 
@@ -118,7 +124,7 @@ function handleLengthButtonClick(boolean) {
 
 // Reset Word Value & User Input
 function handleResetButtonClick() {
-  userInput.value = ''
+  clearUserInput()
   getRandomWord()
 }
 
@@ -126,30 +132,41 @@ function handleResetButtonClick() {
 const userInput = ref('')
 
 const correctCount = ref(0)
-const incorrectCount = ref(0)
+const totalCount = ref(0)
 
 const isOpacity1 = ref(false)
 const toastColor = ref('')
+
+function clearUserInput() {
+  userInput.value = ''
+}
+
+function clearCorrectCounter() {
+  correctCount.value = 0
+}
+
+function clearBothCounters() {
+  correctCount.value = 0
+  totalCount.value = 0
+}  
 
 function checkUserInput() {
   if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
   toastColor.value = 'warning'
   isOpacity1.value = true
-  console.log('if warninng')
   } else if (!props.isTimeAttackOn && userInput.value !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
-    correctCount.value = 0
-    console.log('if !timeattack danger')
+    clearCorrectCounter()
   } else if (props.isTimeAttackOn && userInput.value !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
-    incorrectCount.value++  
-    console.log('if timeattack danger')
+    totalCount.value++  
   } else {
     toastColor.value = 'success'
     isOpacity1.value = true
     userInput.value = ''
+    totalCount.value++  
     correctCount.value++
     getRandomWord()
   }
@@ -162,19 +179,49 @@ function handleFormSubmission() {
   checkUserInput()
 }
 
-// Time Attack 
-const emitTimeAttack = defineEmits('emitTimeAttack')
+const emit = defineEmits(['emitTimeAttack','emitCount'])
+
+function emitCountToParent() {
+  emit('emitCount', [correctCount.value, totalCount.value])
+}
 
 function handleTimeAttackBtn() {
-  emitTimeAttack('emitTimeAttack')
+  emit('emitTimeAttack')
   setTimeout(() => {
-    correctCount.value = 0
+    clearCorrectCounter()
     getRandomWord()
   }, 3000);
 }
+
+watch(() => props.isTimeAttackOn, (newBoolean, oldBoolean) => {
+  if (newBoolean === false) {
+    emitCountToParent()
+    clearBothCounters()
+    isResultsModalOpen.value = true
+  }
+})
+
 const props = defineProps({
   isTimeAttackOn: {
     type: Boolean,
+  },
+  correct: {
+    type: Number,
+  },
+  attempts: {
+    type: Number,
   }
 })
+
+const fieldGoalPercentage = computed(() => {
+  return props.correct / props.attempts * 100 + '%'
+})
+
+
+const isResultsModalOpen = ref(false)
+
+function handleBackButtonClick() {
+  isResultsModalOpen.value = false
+}
+
 </script>
