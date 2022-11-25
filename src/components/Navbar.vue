@@ -29,7 +29,11 @@
   <div class="progress" style="border-radius: 0px; height: 100%;">
     <div class="progress-bar progress-bar-striped" role="progressbar" style="" aria-valuemax="100" :style="{ width: thirtySecondTimer / 30 * 100 + '%'}"></div>
   </div>
-  <div v-if="threeSecondTimer !== 0" class="d-flex justify-content-center">{{threeSecondTimer}}</div>
+  <div v-if="threeSecondTimer !== 0" class="d-flex justify-content-center">
+    <h2 class="mt-3">
+      {{threeSecondTimer}}
+    </h2>
+  </div>
 </nav>
 </template>
 
