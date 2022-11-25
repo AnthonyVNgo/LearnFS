@@ -124,40 +124,29 @@ function handleResetButtonClick() {
 
 // User Input 
 const userInput = ref('')
+
+const correctCount = ref(0)
+const incorrectCount = ref(0)
+
 const isOpacity1 = ref(false)
 const toastColor = ref('')
-const correctCount = ref(0)
 
 function checkUserInput() {
-  if (!props.isTimeAttackOn) {
-    if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
-    toastColor.value = 'warning'
-    isOpacity1.value = true
-  } else if (userInput.value !== randomWord.value) {
+  if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
+  toastColor.value = 'warning'
+  isOpacity1.value = true
+  console.log('if warninng')
+  } else if (!props.isTimeAttackOn && userInput.value !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
     correctCount.value = 0
-  } 
-  else {
-    toastColor.value = 'success'
-    isOpacity1.value = true
-    userInput.value = ''
-    correctCount.value++
-    getRandomWord()
-  }
-  setTimeout(() => {
-    isOpacity1.value = false
-  }, 250);
-  } else if (props.isTimeAttackOn) {
-    if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
-    toastColor.value = 'warning'
-    isOpacity1.value = true
-  } else if (userInput.value !== randomWord.value) {
+    console.log('if !timeattack danger')
+  } else if (props.isTimeAttackOn && userInput.value !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
-    incorrectCount.value++
-  } 
-  else {
+    incorrectCount.value++  
+    console.log('if timeattack danger')
+  } else {
     toastColor.value = 'success'
     isOpacity1.value = true
     userInput.value = ''
@@ -167,8 +156,10 @@ function checkUserInput() {
   setTimeout(() => {
     isOpacity1.value = false
   }, 250);
-  }
-  
+}
+
+function handleFormSubmission() {
+  checkUserInput()
 }
 
 // Time Attack 
@@ -186,11 +177,4 @@ const props = defineProps({
     type: Boolean,
   }
 })
-
-// Time Attack User Input 
-const incorrectCount = ref(0)
-
-function handleFormSubmission() {
-  checkUserInput()
-}
 </script>
