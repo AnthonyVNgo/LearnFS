@@ -74,9 +74,10 @@
   <div v-else class="container">
     <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
       <div class="col-auto">
-        <h3>Correct: {{correct}}</h3>
-        <h3>Attempts: {{attempts}}</h3>
-        <h3>Accuracy: {{fieldGoalPercentage}}</h3>
+        <h3 class="mb-3">Time attack results</h3>
+        <h4>Correct: {{correct}}</h4>
+        <h4 class="my-3">Attempts: {{attempts}}</h4>
+        <h4>Accuracy: {{fieldGoalPercentage}}</h4>
         <button class="btn btn-dark mt-3" @click="handleBackButtonClick">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
@@ -202,11 +203,16 @@ function handleTimeAttackBtn() {
   }, 3000);
 }
 
+function openResultsModal() {
+  isResultsModalOpen.value = true
+}
+
 watch(() => props.isTimeAttackOn, (newBoolean, oldBoolean) => {
   if (newBoolean === false) {
     emitCountToParent()
+    clearUserInput()
     clearBothCounters()
-    isResultsModalOpen.value = true
+    openResultsModal()
   }
 })
 

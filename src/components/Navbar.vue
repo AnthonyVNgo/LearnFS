@@ -38,7 +38,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
   isTimeAttackOn: {
     type: Boolean,

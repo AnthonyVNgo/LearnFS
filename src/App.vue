@@ -56,12 +56,14 @@ function countFrom3() {
     threeSecondTimer.value--
   }, 1000);
   setTimeout(() => {
-    threeSecondTimer.value = 0
     countFrom30()
     clearInterval(interval)
   }, 3000);
 }
 
+function resetThreeSecondTimer() {
+  threeSecondTimer.value = 3
+}
 
 const thirtySecondTimer = ref(0)
 function countFrom30() {
@@ -71,6 +73,7 @@ function countFrom30() {
   setTimeout(() => {
     isTimeAttackOn.value = false
     thirtySecondTimer.value = 0
+    resetThreeSecondTimer()
     clearInterval(myInterval);
   }, 30000);
 }
