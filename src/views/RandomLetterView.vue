@@ -46,6 +46,7 @@
 
   </ViewContainer>
 
+  <!-- refactor into a slot / SLOTTIFY  -->
   <div v-else class="container">
     <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
       <div class="col-auto card p-5">
@@ -85,6 +86,7 @@ function handleResetButtonClick() {
   getRandomLetter()
 }
 
+// REFACTOR / DRY-IFY 
 const userInput = ref('')
 const correctCount = ref(0)
 const totalCount = ref(0)

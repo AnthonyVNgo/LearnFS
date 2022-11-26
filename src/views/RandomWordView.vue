@@ -139,6 +139,7 @@ function handleResetButtonClick() {
   getRandomWord()
 }
 
+// REFACTOR / DRY-IFY 
 const userInput = ref('')
 const correctCount = ref(0)
 const totalCount = ref(0)
