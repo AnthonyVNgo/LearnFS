@@ -74,7 +74,7 @@
   </ViewContainer>
   <div v-else class="container">
     <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
-      <div class="col-auto">
+      <div class="col-auto card p-5">
         <h3 class="mb-3">Time attack results</h3>
         <h4>Correct: {{correct}}</h4>
         <h4 class="my-3">Attempts: {{attempts}}</h4>
