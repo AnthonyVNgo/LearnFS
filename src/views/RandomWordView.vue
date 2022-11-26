@@ -134,18 +134,14 @@ function handleLengthButtonClick(boolean) {
   }
 }
 
-// Reset Word Value & User Input
 function handleResetButtonClick() {
   clearUserInput()
   getRandomWord()
 }
 
-// User Input 
 const userInput = ref('')
-
 const correctCount = ref(0)
 const totalCount = ref(0)
-
 const isOpacity1 = ref(false)
 const toastColor = ref('')
 
@@ -228,7 +224,7 @@ const fieldGoalPercentage = computed(() => {
   if (props.correct === 0 && props.attempts === 0) {
     return '0%'
   } else {
-    return props.correct / props.attempts * 100 + '%'
+    return Math.round(props.correct / props.attempts * 100) + '%'
   }
 })
 
