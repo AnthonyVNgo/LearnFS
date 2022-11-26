@@ -1,5 +1,5 @@
 <template>
-  <ViewContainer>
+  <ViewContainer v-if="!isResultsModalOpen">
 
     <template v-slot:toast>
       <Toast 
@@ -24,7 +24,7 @@
         <label for="randomLetter" class="form-label">
           <h5>Enter the correct Fingerspelling letter</h5>
         </label>
-        <div class="input-group mb-3">
+        <div class="input-group">
           <input type="text" class="form-control form-control" id="randomLetter" v-model="userInput" minlength="1" maxlength="1" placeholder="Type here" autocomplete="off">
           <button type="button" class="btn btn-dark" @click="handleResetButtonClick">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
@@ -43,12 +43,29 @@
         </svg>
       </button>
     </template>
-      
+
   </ViewContainer>
+
+  <div v-else class="container">
+    <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
+      <div class="col-auto card p-5">
+        <h3 class="mb-3">Time attack results</h3>
+        <h4 class="mb-0">Correct: {{correct}}</h4>
+        <h4 class="my-3">Attempts: {{attempts}}</h4>
+        <h4>Accuracy: {{fieldGoalPercentage}}</h4>
+        <button class="btn btn-dark mt-3" @click="handleBackButtonClick">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+          </svg>
+          Back 
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount, computed, watch } from 'vue';
 import Toast from '../components/Toast.vue'
 import ViewContainer from '../components/ViewContainer.vue'
 
@@ -93,14 +110,20 @@ function checkUserInput() {
     toastColor.value = 'warning'
     isOpacity1.value = true
     clearUserInput()
-  } else if (userInput.value !== randomLetter) {
+  } else if (!props.isTimeAttackOn && userInput.value !== randomLetter) {
     toastColor.value = 'danger'
     isOpacity1.value = true
     clearCorrectCounter()
     clearUserInput()
+  } else if (props.isTimeAttackOn && userInput.value !== randomLetter) {
+    toastColor.value = 'danger'
+    isOpacity1.value = true
+    totalCount.value++
+    clearUserInput()
   } else {
     toastColor.value = 'success'
     isOpacity1.value = true
+    totalCount.value++
     correctCount.value++
     clearUserInput()
     getRandomLetter()
@@ -113,4 +136,58 @@ function checkUserInput() {
 function handleFormSubmission() {
   checkUserInput()
 }
+
+// TIME ATTACK 
+const emit = defineEmits(['emitTimeAttack','emitCount'])
+
+function emitCountToParent() {
+  emit('emitCount', [correctCount.value, totalCount.value])
+}
+
+function handleTimeAttackBtn() {
+  emit('emitTimeAttack')
+  setTimeout(() => {
+    clearCorrectCounter()
+    getRandomLetter()
+  }, 3000);
+}
+
+const isResultsModalOpen = ref(false)
+
+function openResultsModal() {
+  isResultsModalOpen.value = true
+}
+
+function handleBackButtonClick() {
+  isResultsModalOpen.value = false
+}
+
+watch(() => props.isTimeAttackOn, (newBoolean, oldBoolean) => {
+  if (newBoolean === false) {
+    emitCountToParent()
+    clearUserInput()
+    clearBothCounters()
+    openResultsModal()
+  }
+})
+
+const fieldGoalPercentage = computed(() => {
+  if (props.correct === 0 && props.attempts === 0) {
+    return '0%'
+  } else {
+    return props.correct / props.attempts * 100 + '%'
+  }
+})
+
+const props = defineProps({
+  isTimeAttackOn: {
+    type: Boolean,
+  },
+  correct: {
+    type: Number,
+  },
+  attempts: {
+    type: Number,
+  }
+})
 </script>

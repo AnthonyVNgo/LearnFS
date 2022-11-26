@@ -70,8 +70,9 @@
         </svg>
       </button>
     </template>
-  
+
   </ViewContainer>
+
   <div v-else class="container">
     <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
       <div class="col-auto card p-5">
@@ -204,8 +205,14 @@ function handleTimeAttackBtn() {
   }, 3000);
 }
 
+const isResultsModalOpen = ref(false)
+
 function openResultsModal() {
   isResultsModalOpen.value = true
+}
+
+function handleBackButtonClick() {
+  isResultsModalOpen.value = false
 }
 
 watch(() => props.isTimeAttackOn, (newBoolean, oldBoolean) => {
@@ -224,12 +231,6 @@ const fieldGoalPercentage = computed(() => {
     return props.correct / props.attempts * 100 + '%'
   }
 })
-
-const isResultsModalOpen = ref(false)
-
-function handleBackButtonClick() {
-  isResultsModalOpen.value = false
-}
 
 const props = defineProps({
   isTimeAttackOn: {
