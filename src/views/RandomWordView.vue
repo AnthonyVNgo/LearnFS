@@ -7,6 +7,7 @@
       :isOpacity1="isOpacity1"
       :correctCount="correctCount"
       :isTimeAttackOn="isTimeAttackOn"
+      on-word-view=true
       />
     </template>
 

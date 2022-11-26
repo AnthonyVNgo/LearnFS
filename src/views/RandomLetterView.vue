@@ -6,6 +6,7 @@
       :toastColor="toastColor"
       :isOpacity1="isOpacity1"
       :correctCount="correctCount"
+      on-letter-view=true
       />
     </template>
 
