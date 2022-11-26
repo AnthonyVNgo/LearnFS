@@ -7,7 +7,7 @@
       :isOpacity1="isOpacity1"
       :correctCount="correctCount"
       :isTimeAttackOn="isTimeAttackOn"
-      on-word-view=true
+      onWordView
       />
     </template>
 
@@ -76,7 +76,7 @@
     <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
       <div class="col-auto card p-5">
         <h3 class="mb-3">Time attack results</h3>
-        <h4>Correct: {{correct}}</h4>
+        <h4 class="mb-0">Correct: {{correct}}</h4>
         <h4 class="my-3">Attempts: {{attempts}}</h4>
         <h4>Accuracy: {{fieldGoalPercentage}}</h4>
         <button class="btn btn-dark mt-3" @click="handleBackButtonClick">

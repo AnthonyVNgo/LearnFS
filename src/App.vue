@@ -31,6 +31,9 @@
             <br>
             <br>
             I hope that you learned something or found this page useful, and if you did, please share it with your friends!
+            <br>
+            <br>
+            If you want to collaborate on a cool project, have open positions, or just want to say hello, feel free to drop me a message
           </p>
           <a href="https://www.linkedin.com/in/anthonyvngo/" target="_blank">
             <button class="btn">
