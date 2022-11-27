@@ -14,7 +14,8 @@
     <template v-slot:cards>
       <div class="d-flex justify-content-center">
         <div class="card ratio ratio-1x1" style="max-width: 160px;">
-          <img :src="`../../public/svg/${randomLetter}.svg`" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
+          <!-- <img :src="`../../public/svg/${randomLetter}.svg`" :alt="randomLetter"  style="object-fit: contain;" class="card-body"> -->
+          <img :src="`../../dist/svg/${randomLetter}.svg`" :alt="randomLetter"  style="object-fit: contain;" class="card-body">
         </div>
       </div>
     </template>

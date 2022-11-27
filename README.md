@@ -28,4 +28,4 @@ As a perpetual student, polyglot in progress, and someone who has lived abroad, 
 - Users can learn more about the project via modal
 <br><br>
 ## Live Demo
-Try the application live at [https://student-grade-table.lfz.com](https://student-grade-table.lfz.com)
+Try the application live at [https://anthonyvngo.github.io/LearnFS/](https://anthonyvngo.github.io/LearnFS/)
