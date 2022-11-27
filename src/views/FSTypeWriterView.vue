@@ -13,7 +13,8 @@
         <h1 v-if="!inputWordArray.length">Type + Enter below</h1>
         <div v-else v-for="letter in inputWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
           <!-- <img :src="`../../public/svg/${letter}.svg`" :alt="letter"  style="object-fit: contain;" class="card-body"> -->
-          <img :src="`../../dist/svg/${letter}.svg`" :alt="letter"  style="object-fit: contain;" class="card-body">
+          <!-- <img :src="`../../dist/svg/${letter}.svg`" :alt="letter"  style="object-fit: contain;" class="card-body"> -->
+          <img :src="`./svg/${letter}.svg`" :alt="letter"  style="object-fit: contain;" class="card-body">
         </div>
       </div>
     </template>
