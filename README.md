@@ -1,29 +1,31 @@
-# aslerator
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+# LearnFS.xyz
+A single page web application for users who want to learn the ASL fingespelling alphabet.
+<br><br>
+## Why I Built This
+As a perpetual student, polyglot in progress, and someone who has lived abroad, I've come to love learning languages (which also extends to programming languages)
+<br><br>
+## Technologies Used
+- Vue.js (Composition API & script setup)
+- Vite
+- Vue Router
+- Bootstrap 5
+- HTML5
+- CSS3
+<br><br>
+## Features
+- Users can view fingerspelling alphabet diagram
+- Users can check if their input matches the fingerspelling letter
+- Users can generate a different fingerspelling letter
+- Users can check if their input matches the fingerspelling word
+- Users can generate a different fingerspelling word
+- Users can increase or decrease fingerspelling word length
+- Users can receive feedback on their input
+- Users can see if they're on a streak
+- Users can race against time with a 30 second time attack
+- Users can see their time attack time in progress
+- Users can see their results
+- Users can translate their own input into fingerspelling 
+- Users can learn more about the project via modal
+<br><br>
+## Live Demo
+Try the application live at [https://student-grade-table.lfz.com](https://student-grade-table.lfz.com)

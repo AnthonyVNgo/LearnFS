@@ -183,6 +183,7 @@ function handleFormSubmission() {
   checkUserInput()
 }
 
+// TIME ATTACK 
 const emit = defineEmits(['emitTimeAttack','emitCount'])
 
 function emitCountToParent() {

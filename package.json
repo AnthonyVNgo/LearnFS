@@ -1,6 +1,7 @@
 {
-  "name": "aslerator",
-  "version": "0.0.0",
+  "name": "learnfs",
+  "version": "1.0.0",
+  "author": "Anthony N",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
