@@ -45,7 +45,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <img src="https://i.imgur.com/zqqSG9H.png" class="w-100">
+          <!-- <img src="https://i.imgur.com/zqqSG9H.png" class="w-100"> -->
+          <!-- <img src="../../public/svg/fsdiagram.png" class="w-100"> -->
+          <img src="./svg/fsdiagram.png" class="w-100">
         </div>
       </div>
     </div>
