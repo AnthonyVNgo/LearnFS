@@ -96,10 +96,8 @@ import { ref, computed, onBeforeMount, watch } from 'vue'
 import Toast from '../components/Toast.vue'
 import ViewContainer from '../components/ViewContainer.vue'
 
-// Loading 
 const loading = ref(null)
 
-// Random Word 
 const randomWord = ref('')
 function getRandomWord() {
   loading.value = true
@@ -116,12 +114,10 @@ onBeforeMount(() => {
   getRandomWord()
 });
 
-// Random Word Split 
 const randomWordArray = computed(() => {
   return randomWord.value.split('')
 });
 
-// Change Word Length 
 const randomWordLength = ref(4)
 function handleLengthButtonClick(boolean) {
   if (boolean === true && randomWordLength.value <= 11) {
@@ -139,7 +135,6 @@ function handleResetButtonClick() {
   getRandomWord()
 }
 
-// REFACTOR / DRY-IFY 
 const userInput = ref('')
 const correctCount = ref(0)
 const totalCount = ref(0)

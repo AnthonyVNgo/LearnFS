@@ -25,9 +25,10 @@
     </div>
   </div>
 </nav>
+
 <nav v-else style="height: 56px;">
   <div class="progress" style="border-radius: 0px; height: 100%;">
-    <div class="progress-bar progress-bar-striped" role="progressbar" style="" aria-valuemax="100" :style="{ width: thirtySecondTimer / 30 * 100 + '%'}"></div>
+    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemax="100" :style="{ width: thirtySecondTimer / 30 * 100 + '%'}"></div>
   </div>
   <div v-if="threeSecondTimer !== 0" class="d-flex justify-content-center">
     <h2 class="mt-3">
@@ -35,6 +36,7 @@
     </h2>
   </div>
 </nav>
+
 <div class="modal fade" id="diagramModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -43,7 +45,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <img src="https://i.imgur.com/zqqSG9H.png" style="width: 100%;">
+          <img src="https://i.imgur.com/zqqSG9H.png" class="w-100">
         </div>
       </div>
     </div>

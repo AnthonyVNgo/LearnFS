@@ -46,7 +46,6 @@
 
   </ViewContainer>
 
-  <!-- refactor into a slot / SLOTTIFY  -->
   <div v-else class="container">
     <div class="row align-items-center justify-content-center" style="height: 50vh; position: relative;">
       <div class="col-auto card p-5">
@@ -70,7 +69,6 @@ import { ref, onBeforeMount, computed, watch } from 'vue';
 import Toast from '../components/Toast.vue'
 import ViewContainer from '../components/ViewContainer.vue'
 
-// Random Letter   
 const randomLetter = $ref('')
 function getRandomLetter() {
   clearUserInput()
@@ -86,7 +84,6 @@ function handleResetButtonClick() {
   getRandomLetter()
 }
 
-// REFACTOR / DRY-IFY 
 const userInput = ref('')
 const correctCount = ref(0)
 const totalCount = ref(0)
