@@ -157,14 +157,15 @@ function clearBothCounters() {
 }  
 
 function checkUserInput() {
-  if (/^[a-zA-Z]+$/.test(userInput.value) === false) {
+  let lowerCasedInput = userInput.value.toLowerCase()
+  if (/^[a-zA-Z]+$/.test(lowerCasedInput) === false) {
   toastColor.value = 'warning'
   isOpacity1.value = true
-  } else if (!props.isTimeAttackOn && userInput.value !== randomWord.value) {
+  } else if (!props.isTimeAttackOn && lowerCasedInput !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
     clearCorrectCounter()
-  } else if (props.isTimeAttackOn && userInput.value !== randomWord.value) {
+  } else if (props.isTimeAttackOn && lowerCasedInput !== randomWord.value) {
     toastColor.value = 'danger'
     isOpacity1.value = true
     totalCount.value++  
