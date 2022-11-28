@@ -23,8 +23,6 @@
 
       <div v-else class="d-flex flex-wrap justify-content-center">
         <div v-for="letter in randomWordArray" class="card ratio ratio-1x1" style="min-width: 80px; max-width: 10%;">
-          <!-- <img :src="`../../public/svg/${letter}.svg`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body"> -->
-          <!-- <img :src="`../../dist/svg/${letter}.svg`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body"> -->
           <img :src="`./svg/${letter}.svg`" alt="" srcset="" style="width: 100%; object-fit: contain; object-position: center;" class="card-body">
         </div>
       </div>
