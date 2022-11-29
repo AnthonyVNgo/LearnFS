@@ -31,4 +31,4 @@ As a perpetual student, polyglot in progress, and someone who has lived abroad, 
 Try the live application at [https://learnfs.xyz](https://learnfs.xyz)
 <br><br>
 ## Preview
-![learnfs.xyz preview](https://i.imgur.com/gapGjI2.png)
+![learnfs.xyz preview](https://i.imgur.com/OLop2vN.png)
