@@ -70,7 +70,7 @@ function checkUserInput() {
 }
 
 function generateInputWordArray() {
-  const inputWordSplit = userInput.value.split('')
+  const inputWordSplit = userInput.value.toLowerCase().split('')
   inputWordArray.value = inputWordSplit
 }
 

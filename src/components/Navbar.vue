@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-          <RouterLink class="navbar-brand d-none d-lg-block" to="/">LearnFS.io</RouterLink>
+          <RouterLink class="navbar-brand d-none d-lg-block" to="/">LearnFS.xyz</RouterLink>
         </li>
         <li class="nav-item">
           <RouterLink class="nav-link" to="/random-word">Random Word</RouterLink>
