@@ -29,3 +29,6 @@ As a perpetual student, polyglot in progress, and someone who has lived abroad, 
 <br><br>
 ## Live Demo
 Try the application live at [https://learnfs.xyz](https://learnfs.xyz)
+<br><br>
+## Preview
+![learnfs.xyz preview](https://i.imgur.com/gapGjI2.png)
