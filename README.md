@@ -2,7 +2,7 @@
 A single page web application for users who want to learn the ASL fingespelling alphabet.
 <br><br>
 ## Why I Built This
-As a perpetual student, polyglot in progress, and someone who has lived abroad, I've come to love learning languages (which also extends to programming languages)
+As a perpetual student, polyglot in progress, and someone who has lived abroad, I've come to love learning languages (which also extends to programming languages), and that's why I created this project
 <br><br>
 ## Technologies Used
 - Vue.js (Composition API & script setup)
@@ -28,4 +28,4 @@ As a perpetual student, polyglot in progress, and someone who has lived abroad, 
 - Users can learn more about the project via modal
 <br><br>
 ## Live Demo
-Try the application live at [https://anthonyvngo.github.io/LearnFS/](https://anthonyvngo.github.io/LearnFS/)
+Try the application live at [https://learnfs.xyz](https://learnfs.xyz)
