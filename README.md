@@ -28,7 +28,7 @@ As a perpetual student, polyglot in progress, and someone who has lived abroad, 
 - Users can learn more about the project via modal
 <br><br>
 ## Live Demo
-Try the application live at [https://learnfs.xyz](https://learnfs.xyz)
+Try the live application at [https://learnfs.xyz](https://learnfs.xyz)
 <br><br>
 ## Preview
 ![learnfs.xyz preview](https://i.imgur.com/gapGjI2.png)
